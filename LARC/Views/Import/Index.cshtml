@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Import Your Fund File</h2>
+@using (Html.BeginForm("Index", "Import", FormMethod.Post, 
+    new { enctype = "multipart/form-data" }))
+{
+    <label for="ticker">Ticker</label>
+    <input type="text" name="ticker" />
+    <label for="file">File</label>
+    <input type="file" name="file" />
+    <input type="submit" />
+}
+
