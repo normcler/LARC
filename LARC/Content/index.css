@@ -1,0 +1,138 @@
+﻿.larc-color {
+  background-color: DarkSlategray;
+  color: Gold;
+}
+.larc-color-reversed {
+  background-color: Gold;
+  color: DarkSlateGray;
+}
+/*.nav {
+    margin-left: -25em;
+}*/
+.nav > li {
+  display: inline-block;
+}
+.nav > li > a {
+  background-color: Gold;
+  color: DarkSlateGray;
+  padding: 0.1em 0.4em;
+}
+.nav > li > a:hover {
+  background-color: DarkSlategray;
+  color: Gold;
+}
+.nav > li:hover {
+  box-shadow: 0.15em 0.15em rgba(218, 165, 32, 0.5);
+}
+#page-container {
+  margin: 2em 0 0 2em;
+  box-sizing: border-box;
+  font-family: 'Bellefair', serif;
+  font-weight: 600;
+  max-width: 560px;
+}
+.larc-theme {
+  background-color: DarkSlategray;
+  color: Gold;
+  font-family: 'Bellefair', serif;
+  font-size: 2em;
+  padding: 0.4em;
+  border: 0.01em solid black;
+  border-radius: 0.5em;
+}
+.larc-theme #larc-abbr {
+  background-color: Gold;
+  color: DarkSlateGray;
+  margin: auto;
+  border: 0.01px solid white;
+  padding: 0.1em;
+  border-radius: 0.3em;
+}
+.larc-theme li {
+  background-color: Gold;
+  color: DarkSlateGray;
+  font-size: 0.7em;
+  font-weight: bold;
+  margin: 0.0px 0.5em;
+  border: 0.01px solid white;
+  padding: 0.1em;
+  border-radius: 0.3em;
+}
+.panel-heading h3 {
+  font-size: 2em;
+}
+#sign-in-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+#bottom-row {
+  display: flex;
+  justify-content: space-between;
+}
+#forgot {
+  color: blue;
+  margin-top: 1em;
+}
+.btn {
+  width: 20%;
+  background-color: DarkSlategray;
+  color: Gold;
+  font-family: 'Bellefair', serif;
+  font-weight: bold;
+  padding: 0.2em;
+  margin-top: 1em;
+  margin-right: 20%;
+  border-radius: 1em;
+}
+#btn-submit {
+  font-size: 1.8em;
+}
+#btn-submit:hover,
+#btn-submit:focus {
+  background-color: Gold;
+  color: DarkSlateGray;
+  box-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.25);
+}
+#new {
+  margin: auto;
+  color: #dddddd;
+}
+hr {
+  width: 100%;
+}
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+nav {
+  color: blue;
+  display: flex;
+  justify-content: space-around;
+}
+nav span {
+  display: inline-block;
+}
+nav a {
+  text-decoration: none;
+}
+footer > span {
+  display: block;
+  font-size: 0.8em;
+}
+.form-control {
+  font-size: 1.2em;
+  display: block;
+  width: 80%;
+  padding: 1em;
+}
+@media screen and (max-width: 600px) {
+  #larc-name {
+    display: none;
+  }
+  #larc-abbr {
+    margin: 0em auto;
+  }
+}
