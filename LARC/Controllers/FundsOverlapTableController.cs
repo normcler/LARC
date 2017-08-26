@@ -69,7 +69,10 @@ namespace LARC.Controllers
         // GET: FundsOverlapTable
         public ActionResult Index()
         {
-            return View();
+            //  By passing an argument to the view method, we are "binding" the
+            //  testOverlapList object to the view.  In this way, the
+            // testOverlapListobject will be accessible in the cshtml
+            return View(testOverlapList);
         }
     }
 
