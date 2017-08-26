@@ -29,6 +29,8 @@ namespace Morningstar.Importer
         ///         operation.
         ///     2)  N. S. Clerman, 29-Jul-2017: Employ a method to form the file
         ///         name.
+        ///     3)  N. S. Clerman, 26-Aug-2017: This is called from the Import 
+        ///         controller.
         /// </remarks>
         public static List<Holding> Import (string repoLocation, string ticker)
         {
@@ -72,7 +74,7 @@ namespace Morningstar.Importer
         /// <remarks>
         ///     Programmer: N. S. Clerman
         /// </remarks>
-        private static string fullyQualifiedFileName(string repoLocation,
+        private static string FullyQualifiedFileName(string repoLocation,
             string ticker)
         {
 

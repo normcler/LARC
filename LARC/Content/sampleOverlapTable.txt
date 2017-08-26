@@ -1,0 +1,8 @@
+ FSEVX
+ PRHSX
+BMRN    Biomarin Pharmaceutical Inc     0.595
+ALGN    Align Technology Inc     0.290
+TFX    Teleflex Inc     0.335
+ALKS    Alkermes PLC     0.605
+WCG    WellCare Health Plans Inc     0.330
+WST    West Pharmaceutical Services Inc     0.435
