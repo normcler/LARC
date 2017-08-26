@@ -71,8 +71,10 @@ namespace LARC.Controllers
         {
             //  By passing an argument to the view method, we are "binding" the
             //  testOverlapList object to the view.  In this way, the
-            // testOverlapListobject will be accessible in the cshtml
-            return View(testOverlapList);
+            //  testOverlapListobject will be accessible in the cshtml.
+
+            //  This is the "Model" refered to in the corresponding view.
+            return View(testTable);
         }
     }
 

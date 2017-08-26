@@ -1,0 +1,32 @@
+﻿@model LARC.Models.FundsOverlapTable
+@{
+    ViewBag.Title = "Funds Overlap Table";
+}
+
+<h2>Funds Overlap Table</h2>
+
+<table>
+  <caption>Funds Overlap Table for funds 
+    @Model.FundSymbol_1 and @Model.FundSymbol_1</caption>
+  <thead>
+    <tr>
+      <th>Ticker</th>
+      <th>Name</th>
+      <th>Overlap</th>
+    </tr>
+  </thead>
+  <tbody>
+    @{
+        int numberOfTickers = Model.OverlapList.Count;
+        for (int i = 0; i < numberOfTickers; i++)
+        {
+            <tr>
+              <td>@Model.OverlapList[i].HoldingTicker</td>
+              <td>@Model.OverlapList[i].HoldingName</td>
+              <td>@Model.OverlapList[i].Overlap</td>
+            </tr>
+        }
+    }
+  </tbody>
+</table>
+

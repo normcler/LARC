@@ -222,10 +222,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Import\Index.cshtml" />
+    <Content Include="Views\FundsOverlapTable\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\FundsOverlapTable\" />
     <Folder Include="Views\SubscribeView\" />
   </ItemGroup>
   <ItemGroup>
