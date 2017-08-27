@@ -165,6 +165,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\FundsOverlapTable.css">
+      <DependentUpon>FundsOverlapTable.less</DependentUpon>
+    </Content>
+    <Content Include="Content\FundsOverlapTable.min.css">
+      <DependentUpon>FundsOverlapTable.css</DependentUpon>
+    </Content>
     <Content Include="Content\index.css">
       <DependentUpon>index.less</DependentUpon>
     </Content>
@@ -190,6 +196,7 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="Content\FundsOverlapTable.less" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

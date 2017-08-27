@@ -1,32 +1,43 @@
 ﻿@model LARC.Models.FundsOverlapTable
 @{
-    ViewBag.Title = "Funds Overlap Table";
+  ViewBag.Title = "Funds Overlap Table";
 }
 
-<h2>Funds Overlap Table</h2>
+@section Includes {
+  <link href="~/Content/FundsOverlapTable.css"
+        rel="stylesheet"
+        type="text/css" />
+}
+<div class="container col-md-6">
+  <h2>Funds Overlap Table</h2>
 
-<table>
-  <caption>Funds Overlap Table for funds 
-    @Model.FundSymbol_1 and @Model.FundSymbol_1</caption>
+  <table class="table-condensed table-striped table-bordered">
+    <caption>
+      Funds Overlap Table for funds
+      <a href="#">@Model.FundSymbol_1</a> and <a href="#">@Model.FundSymbol_2
+    </a>
+  </caption>
   <thead>
     <tr>
       <th>Ticker</th>
       <th>Name</th>
-      <th>Overlap</th>
+      <th>Overlap (%)</th>
     </tr>
   </thead>
   <tbody>
     @{
-        int numberOfTickers = Model.OverlapList.Count;
-        for (int i = 0; i < numberOfTickers; i++)
-        {
-            <tr>
-              <td>@Model.OverlapList[i].HoldingTicker</td>
-              <td>@Model.OverlapList[i].HoldingName</td>
-              <td>@Model.OverlapList[i].Overlap</td>
-            </tr>
-        }
+      int numberOfTickers = Model.OverlapList.Count;
+      decimal totalOverlap = 0.0m;
+      for (int i = 0; i < numberOfTickers; i++)
+      {
+        totalOverlap += Model.OverlapList[i].Overlap;
+        <tr>
+          <td>@Model.OverlapList[i].HoldingTicker</td>
+          <td>@Model.OverlapList[i].HoldingName</td>
+          <td>@Model.OverlapList[i].Overlap</td>
+        </tr>
+      }
     }
   </tbody>
 </table>
-
+</div>

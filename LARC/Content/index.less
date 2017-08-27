@@ -1,5 +1,7 @@
-﻿@larc-font: 'Bellefair', serif;
-// @larc-font: 'Marcellus SC', serif;
+﻿@larc-font-lower: 'Bellefair', serif;
+@larc-font-upper: 'Marcellus SC', serif;
+@larc-sans-serif: 'Roboto', sans-serif;
+@larc-serif: 'Roboto Slab', serif;
 
 .larc-color {
     background-color: DarkSlategray;
@@ -35,14 +37,14 @@
 #page-container {
     margin: 2em 0 0 2em;
     box-sizing: border-box;
-    font-family: @larc-font;
+    font-family: @larc-serif;
     font-weight: 600;
     max-width: 560px;
 }
 
 .larc-theme {
     .larc-color;
-    font-family: @larc-font;
+    font-family: @larc-serif;
     font-size: 2em;
     padding: 0.4em;
     border: 0.01em solid black;
@@ -94,7 +96,7 @@
 .btn {
     width: 20%;
     .larc-color;
-    font-family: @larc-font;
+    font-family: @larc-serif;
     font-weight: bold;
     padding: 0.2em;
     margin-top: 1em;

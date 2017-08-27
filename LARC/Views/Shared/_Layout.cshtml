@@ -10,17 +10,20 @@ Designer: N. S. Clerman,
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>LARC | Lam-Ed Asset Research Consulting - @ViewBag.Title</title>
-    <link href="https://fonts.googleapis.com/css?family=Bellefair" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700|
+          Roboto:400,400i,500,500i,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bellefair|Marcellus+SC"
           rel="stylesheet">
 
     <!-- Bootstrap links-->
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Includes", required: false)
+
 </head>
 <body>
     <!-- LARC Banner -->
-        <div class="larc-theme" class="jumbotron">
+        <div class="larc-theme jumbotron">
             <div>
                 <span id="larc-abbr"><strong>LARC</strong></span>
                 <span id="larc-name">Lamed Asset Research Consulting</span>

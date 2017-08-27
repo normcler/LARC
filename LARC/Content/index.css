@@ -27,14 +27,14 @@
 #page-container {
   margin: 2em 0 0 2em;
   box-sizing: border-box;
-  font-family: 'Bellefair', serif;
+  font-family: 'Roboto Slab', serif;
   font-weight: 600;
   max-width: 560px;
 }
 .larc-theme {
   background-color: DarkSlategray;
   color: Gold;
-  font-family: 'Bellefair', serif;
+  font-family: 'Roboto Slab', serif;
   font-size: 2em;
   padding: 0.4em;
   border: 0.01em solid black;
@@ -78,7 +78,7 @@
   width: 20%;
   background-color: DarkSlategray;
   color: Gold;
-  font-family: 'Bellefair', serif;
+  font-family: 'Roboto Slab', serif;
   font-weight: bold;
   padding: 0.2em;
   margin-top: 1em;
