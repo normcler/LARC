@@ -14,9 +14,8 @@
   <table class="table-condensed table-striped table-bordered">
     <caption>
       Funds Overlap Table for funds
-      <a href="#">@Model.FundSymbol_1</a> and <a href="#">
-        @Model.FundSymbol_2
-    </a>
+      @Html.ActionLink(Model.FundSymbol_1, "Index", "FundDetails", new { id = Model.FundSymbol_1 }, null) and
+      @Html.ActionLink(Model.FundSymbol_2, "Index", "FundDetails", new { id = Model.FundSymbol_2 }, null)
   </caption>
   <thead>
     <tr>
@@ -28,10 +27,8 @@
   <tbody>
     @{
       int numberOfTickers = Model.OverlapList.Count;
-      decimal totalOverlap = 0.0m;
       for (int i = 0; i < numberOfTickers; i++)
       {
-        totalOverlap += Model.OverlapList[i].Overlap;
         <tr>
           <td>@Model.OverlapList[i].HoldingTicker</td>
           <td>@Model.OverlapList[i].HoldingName</td>
@@ -63,28 +60,61 @@
     function drawChart() {
 
       // Create the data table.
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Topping');
-      data.addColumn('number', 'Slices');
-      data.addRows([
-        ['Mushrooms', 3],
-        ['Onions', 1],
-        ['Olives', 1],
-        ['Zucchini', 1],
-        ['Pepperoni', 2]
-      ]);
 
-      // Set chart options
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Ticker');
+      data.addColumn('number', 'Overlap');
+      @{
+        decimal totalOverlap = Model.OverlapList.
+          Select(o => o.Overlap).ToArray().Sum();
+        decimal [] equityOverlap = Model.OverlapList.
+          Select(x => (x.Overlap / totalOverlap) ).ToArray();
+      }
+
+      //data.addColumn('string', 'Topping');
+      //data.addColumn('number', 'Slices');
+
+      // the <text> HTML tag is telling Razor that this is not C#.
+      // this is not rendered.
+      data.addRows([
+      @{
+        for (int i = 0; i < Model.OverlapList.Count; i++)
+        {
+          // Note the semicolon. This is different than the original Google 
+          // code commented out below because we are adding rows one at a time
+          // and not as an array of arrays.
+          //Remember, the code in this script is JavaScript.
+          <text>['@Model.OverlapList[i].HoldingTicker',
+                              @equityOverlap[i]],</text>
+        }
+      }
+      ]);
+      //data.addRows([
+
+      //  ['Mushrooms', 3],
+      //  ['Onions', 1],
+      //  ['Olives', 1],
+      //  ['Zucchini', 1],
+      //  ['Pepperoni', 2]
+      //]);
+
+          // Set chart options
+      //var options = {
+      //  'title': 'How Much Pizza I Ate Last Night',
+      //  'width': 400,
+      //  'height': 300
+      //};
+
       var options = {
-        'title': 'How Much Pizza I Ate Last Night',
+        'title': 'Percent Overlap',
         'width': 400,
         'height': 300
-      };
+      }
 
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.
-        PieChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.
+          PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
     }
   </script>
 }
