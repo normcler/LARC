@@ -157,6 +157,8 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\FundsOverlapTable.cs" />
     <Compile Include="Models\HoldingOverlap.cs" />
+    <Compile Include="Models\PortfolioHolding.cs" />
+    <Compile Include="Models\PortfolioList.cs" />
     <Compile Include="Models\SubscribeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
