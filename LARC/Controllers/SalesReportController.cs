@@ -19,7 +19,7 @@ namespace LARC.Controllers
 
       // The instantion of the class SalesReport that holds our
       // data. The class is defined in the model.
-      Models.SalesReport model = new Models.SalesReport();
+      SalesReport report = new SalesReport();
       using (SqlConnection connection = new SqlConnection(connectionString))
       {
         connection.Open();
@@ -29,10 +29,11 @@ namespace LARC.Controllers
           command.CommandType = System.Data.CommandType.StoredProcedure;
           using (SqlDataReader reader = command.ExecuteReader())
           {
+            // "StateProvince" is the column heading in the DB.
             int columnPosition = reader.GetOrdinal("StateProvince");
             while (reader.Read())
             {
-              model.states.Add(reader.GetString(columnPosition));
+              report.states.Add(reader.GetString(columnPosition));
             }
           }
         }
@@ -57,7 +58,7 @@ namespace LARC.Controllers
                 decimal dollarAmount = reader.GetDecimal(dollarAmountColumn);
                 TopRevenueByDollar newItem = 
                   new TopRevenueByDollar(amount, name, dollarAmount);
-                model.TopRevenuesByDollar.Add(newItem);
+                report.TopRevenuesByDollar.Add(newItem);
                 
               }
             }
@@ -65,7 +66,7 @@ namespace LARC.Controllers
         }
         connection.Close();
       }
-      return View(model);
+      return View(report);
     }
   }
 }

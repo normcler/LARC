@@ -10,7 +10,6 @@ namespace LARC.Controllers
     {
         public ActionResult Index()
         {
-            FundsOverlapTableController.InitializeTestTable();
             return View();
         }
 

@@ -11,4 +11,11 @@
     "Select a State")
   <input type="submit" value="Get Report" class="btn btn-primary" />
 </form>
-
+@if (Model.TopRevenuesByDollar.Count > 0)
+{
+  <div>
+    @Model.TopRevenuesByDollar[0].Name -
+    @Model.TopRevenuesByDollar[0].Amount -
+    @Model.TopRevenuesByDollar[0].DollarAmount
+  </div>
+}

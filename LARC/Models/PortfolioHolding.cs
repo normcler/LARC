@@ -10,7 +10,15 @@ namespace LARC.Models
   /// </summary>
   public class PortfolioHolding
   {
-      public string Symbol { get; set; }
-      public int NumberOfShares { get; set; }
+    public string Symbol { get; set; }
+    public string Name { get; set; }
+    public decimal NumberOfShares { get; set; }
+
+    public PortfolioHolding ()
+    {
+      this.Symbol = "";
+      this.Name = "";
+      this.NumberOfShares = 0.0m;
+    }
   }
 }

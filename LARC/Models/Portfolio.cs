@@ -8,8 +8,8 @@ namespace LARC.Models
   /// <summary>
   ///   A list of objects of class PortfolioHolding
   /// </summary>
-  public class PortfolioList
+  public class Portfolio
   {
-    public List<PortfolioHolding> Portfolio { get; set; }
+    public List<PortfolioHolding> PortfolioList { get; set; }
   }
 }

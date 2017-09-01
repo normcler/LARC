@@ -71,6 +71,7 @@ namespace LARC.Controllers
       //  testOverlapListobject will be accessible in the cshtml.
 
       //  This is the "Model" refered to in the corresponding view.
+      InitializeTestTable();
       return View(testTable);
     }
   }
