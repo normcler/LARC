@@ -150,6 +150,7 @@
     <Compile Include="Controllers\FundsOverlapTableController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
+    <Compile Include="Controllers\SalesReportController.cs" />
     <Compile Include="Controllers\SubscribeViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -159,6 +160,7 @@
     <Compile Include="Models\HoldingOverlap.cs" />
     <Compile Include="Models\PortfolioHolding.cs" />
     <Compile Include="Models\PortfolioList.cs" />
+    <Compile Include="Models\SalesReport.cs" />
     <Compile Include="Models\SubscribeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -199,6 +201,7 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Content\FundsOverlapTable.less" />
+    <Content Include="connectionStrings.config" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -232,6 +235,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Import\Index.cshtml" />
     <Content Include="Views\FundsOverlapTable\Index.cshtml" />
+    <Content Include="Views\SalesReport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,14 @@
+﻿@model LARC.Models.SalesReport
+@{
+  ViewBag.Title = "Index";
+  var statesSelectList =
+    Model.states.Select(x => new SelectListItem { Text = x, Value = x });
+}
+
+<h2>Adventure World Sales Report</h2>
+<form>
+  @Html.DropDownList("id", statesSelectList,
+    "Select a State")
+  <input type="submit" value="Get Report" class="btn btn-primary" />
+</form>
+
