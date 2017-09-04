@@ -63,7 +63,31 @@ namespace LARC.Controllers
               }
             }
           }
+
+          using (SqlCommand command = connection.CreateCommand())
+          {
+            command.CommandText = "sp_GetTopSalesByQuantity";
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@stateProvince", stateProvince);
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+              int amountColumn = reader.GetOrdinal("Amount");
+              int nameColumn = reader.GetOrdinal("Name");
+              while (reader.Read())
+              {
+                int amount = reader.GetInt32(amountColumn);
+                string name = reader.GetString(nameColumn);
+                TopRevenueByQuantity newItem =
+                  new TopRevenueByQuantity(amount, name);
+                report.TopRevenuesByQuantity.Add(newItem);
+
+              }
+            }
+          }
         }
+
+
         connection.Close();
       }
       return View(report);

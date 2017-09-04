@@ -10,7 +10,7 @@ namespace LARC.Models
   ///     The data for a holding that is held by two funds.
   ///     The data comprise the holding ticker (e.g., MSFT),
   ///     the holding name (e.g., Microsoft Corp.) and the overlap expressed
-  ///     in decimal (e.g., 0.855).
+  ///     in percentage (e.g., 0.855).
   /// </summary>
   public class HoldingOverlap
   {

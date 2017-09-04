@@ -147,16 +147,23 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FundsOverlapTableController.cs" />
+    <Compile Include="Controllers\FundTableController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
+    <Compile Include="Controllers\PortfolioController.cs" />
+    <Compile Include="Controllers\PortfolioHoldingController.cs" />
     <Compile Include="Controllers\SalesReportController.cs" />
     <Compile Include="Controllers\SubscribeViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Models\FundsOverlapTable.cs" />
+    <Compile Include="Models\FundTable.cs" />
+    <Compile Include="Models\FundTableRow.cs" />
     <Compile Include="Models\HoldingOverlap.cs" />
     <Compile Include="Models\Portfolio.cs" />
     <Compile Include="Models\PortfolioHolding.cs" />
@@ -181,6 +188,12 @@
     <Content Include="Content\index.min.css">
       <DependentUpon>index.css</DependentUpon>
     </Content>
+    <Content Include="Content\SalesReport.css">
+      <DependentUpon>SalesReport.less</DependentUpon>
+    </Content>
+    <Content Include="Content\SalesReport.min.css">
+      <DependentUpon>SalesReport.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -202,6 +215,7 @@
     </None>
     <Content Include="Content\FundsOverlapTable.less" />
     <Content Include="connectionStrings.config" />
+    <Content Include="Content\SalesReport.less" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -236,9 +250,13 @@
     <Content Include="Views\Import\Index.cshtml" />
     <Content Include="Views\FundsOverlapTable\Index.cshtml" />
     <Content Include="Views\SalesReport\Index.cshtml" />
+    <Content Include="Views\Portfolio\Index.cshtml" />
+    <Content Include="Views\FundTable\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Client\" />
+    <Folder Include="Views\PortfolioHolding\" />
     <Folder Include="Views\SubscribeView\" />
   </ItemGroup>
   <ItemGroup>

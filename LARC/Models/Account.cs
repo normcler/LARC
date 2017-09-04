@@ -11,17 +11,21 @@ namespace LARC.Models
     /// </summary>
     public class Account
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+      public int ID { get; set; }
+      public string FirstName { get; set; }
+      public string LastName { get; set; }
+      public string Email { get; set; }
+      public string Password { get; set; }
+      public DateTime DateCreated { get; set; }
+      public DateTime ExpirationDate { get; set; }
+      public DateTime LastDateModified { get; set; }
 
-        public Account()
-        {
-            FirstName = "";
-            LastName = "";
-            Email = "";
-            Password = "";
-        }
+    public Account()
+      {
+          FirstName = "";
+          LastName = "";
+          Email = "";
+          Password = "";
+      }
     }
 }

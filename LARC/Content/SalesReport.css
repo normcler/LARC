@@ -1,0 +1,14 @@
+﻿#select-panel {
+  margin-top: 2em;
+}
+#select-panel h2 {
+  font-weight: bold;
+}
+#select-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+caption {
+  color: black;
+}

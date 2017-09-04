@@ -1,0 +1,30 @@
+﻿@model LARC.Models.Portfolio
+
+@{
+  ViewBag.Title = "Portfolio";
+}
+
+@{
+  if (!Model.Equals(null)) {
+    <table class="table-condensed table-striped table-bordered">
+      <caption>
+        Portfolio Holdings for the Portfolio
+      </caption>
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Shares</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var h in Model.PortfolioList)
+        {
+          <tr>
+            <td>@h.Symbol</td>
+            <td>@h.NumberOfShares</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+}

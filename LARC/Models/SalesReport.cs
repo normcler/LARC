@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace LARC.Models
 {
@@ -23,8 +25,11 @@ namespace LARC.Models
 
   public class TopRevenueByDollar
   {
+    //[Display(Name = "Amount")]
     public int Amount { get; set; }
+    //[Display(Name = "Name")]
     public string Name { get; set; }
+    //[Display(Name = "Dollar Amount")]
     public decimal DollarAmount { get; set; }
 
     public TopRevenueByDollar(int amount, string name, decimal dollarAmount)
@@ -39,5 +44,13 @@ namespace LARC.Models
   {
     public int Amount { get; set; }
     public string Name { get; set; }
+
+    public TopRevenueByQuantity(int amount, string name)
+    {
+      //[Display(Name = "Quantity")]
+      this.Amount = amount;
+      //[Display(Name = "Amount")]
+      this.Name = name;
+    }
   }
 }

@@ -1,0 +1,33 @@
+﻿@model LARC.Models.FundTable
+@{
+    ViewBag.Title = "Fund Table";
+}
+
+<table class="table-condensed table-striped table-bordered">
+  <caption>
+    Portfolio Holdings for the @Model.Name Fund
+  </caption>
+  <thead>
+    <tr>
+      <th>Ticker</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Weighting</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var r in Model.TableRows)
+    {
+      <tr>
+        <td>@r.Ticker</td>
+        <td>@r.Name</td>
+        <td>@r.Price</td>
+        <td>@r.Weighting</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+<h2>Index</h2>
+

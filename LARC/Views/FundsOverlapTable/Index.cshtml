@@ -14,8 +14,10 @@
   <table class="table-condensed table-striped table-bordered">
     <caption>
       Funds Overlap Table for funds
-      @Html.ActionLink(Model.FundSymbol_1, "Index", "FundDetails", new { id = Model.FundSymbol_1 }, null) and
-      @Html.ActionLink(Model.FundSymbol_2, "Index", "FundDetails", new { id = Model.FundSymbol_2 }, null)
+      @Html.ActionLink(Model.FundSymbol_1, "Index", "FundDetails", 
+        new { id = Model.FundSymbol_1 }, null) and
+      @Html.ActionLink(Model.FundSymbol_2, "Index", "FundDetails",
+        new { id = Model.FundSymbol_2 }, null)
   </caption>
   <thead>
     <tr>

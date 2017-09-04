@@ -1,21 +1,85 @@
 ﻿@model LARC.Models.SalesReport
+
+@section Includes {
+  <link href="@Url.Content("~/Content/SalesReport.css")" rel="stylesheet" type="text/css" />
+}
+
 @{
   ViewBag.Title = "Index";
   var statesSelectList =
     Model.states.Select(x => new SelectListItem { Text = x, Value = x });
 }
 
-<h2>Adventure World Sales Report</h2>
-<form>
-  @Html.DropDownList("id", statesSelectList,
-    "Select a State")
-  <input type="submit" value="Get Report" class="btn btn-primary" />
-</form>
-@if (Model.TopRevenuesByDollar.Count > 0)
-{
-  <div>
-    @Model.TopRevenuesByDollar[0].Name -
-    @Model.TopRevenuesByDollar[0].Amount -
-    @Model.TopRevenuesByDollar[0].DollarAmount
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-offset-1 col-md-5 col-xs-offset-1 col-xs-10">
+      <div class="panel panel-default" id="select-panel">
+        <div class="panel-heading">
+          <h2 class="panel-title">Adventure World Sales Report</h2>
+        </div>
+        <div class="panel-body">
+          <form id="select-form">
+            @Html.DropDownList("id", statesSelectList,
+            "Select a State")
+            <input type="submit" value="Get Report" class="btn btn-primary btn-sm" />
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-}
+</div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-4 col-md-offset-1
+         col-xs-offset-1 col-xs-10">
+        <table class="table-condensed table-striped table-bordered">
+          <caption>
+            Top Products by Revenue
+          </caption>
+          <thead>
+            <tr>
+              <!--Example: Html.DisplayNameFor(m => m.ID)-->
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Dollar Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var t in Model.TopRevenuesByDollar)
+            {
+              <tr>
+                <td>@t.Name</td>
+                <td>@t.Amount</td>
+                <td>@t.DollarAmount</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-offset-1 col-md-4
+         col-xs-offset-1 col-xs-10 col-xs-offset-1">
+        <table class="table-condensed table-striped table-bordered">
+          <caption>
+            Top Products by Quantity
+          </caption>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var t in Model.TopRevenuesByQuantity)
+            {
+              <tr>
+                <td>@t.Name</td>
+                <td>@t.Amount</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+

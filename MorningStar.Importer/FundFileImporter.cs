@@ -38,8 +38,9 @@ namespace Morningstar.Importer
             List<Holding> result = new List<Holding>();
 
             // get the fully-qualified file name.
-            string filename = repoLocation;
-
+            // This line was, I believe, written by Joe.
+            //string filename = repoLocation;
+            string filename = FullyQualifiedFileName(repoLocation, ticker);
             using (StreamReader reader = File.OpenText(filename))
             {
                 var fund_csv = new CsvReader(reader);
