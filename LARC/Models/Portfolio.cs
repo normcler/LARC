@@ -68,7 +68,41 @@ namespace LARC.Models
         this.PortfolioDictionary[item.Symbol] = equityList;
       }
     }
+
+    /// <summary>
+    ///   Compute the total overlap between two funds in a portfolio.
+    /// </summary>
+    /// <param name="fundSymbol_1">The symbol of the first fund</param>
+    /// <param name="fund_Symbol_2">The symbol of the second fund</param>
+    /// <returns></returns>
+    public decimal ComputeTotalOverlap(string fundSymbol_1, string fundSymbol_2)
+    {
+      decimal fundsOverlap = 0.0M;
+      if ((fundSymbol_1 != fundSymbol_2) &&
+          (PortfolioDictionary.Count > 0) &&
+          PortfolioDictionary.ContainsKey(fundSymbol_1) &&
+          PortfolioDictionary.ContainsKey(fundSymbol_2))
+      {
+        List<Holding> hList_1 = PortfolioDictionary[fundSymbol_1];
+        List<Holding> hList_2 = PortfolioDictionary[fundSymbol_2];
+        List<Holding> commonHoldings = new List<Holding>();
+
+        int kntCommon = 0;
+        foreach (Holding h_1 in hList_1)
+        {
+          foreach (Holding h_2 in hList_2)
+          {
+            if (h_1 == h_2)
+            {
+              commonHoldings.Add(h_1);
+              decimal currentOverlap = h_1.ComputerOverlap(h_2);
+              kntCommon++;
+              fundsOverlap += currentOverlap;
+            }
+          }
+        }
+      }
+      return fundsOverlap;
+    }
   }
-
-
 }

@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LARC", "LARC\LARC.csproj", "{F0FBA354-5A93-4531-B352-C1231D1DCA8E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Morningstar.Importer", "MorningStar.Importer\Morningstar.Importer.csproj", "{3EA80B10-26A9-4F5C-940F-546F74EAEDA2}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "LARC_DB", "LARC_DB\LARC_DB.sqlproj", "{3A309448-B226-498E-9299-284E37108CA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,12 @@ Global
 		{3EA80B10-26A9-4F5C-940F-546F74EAEDA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EA80B10-26A9-4F5C-940F-546F74EAEDA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EA80B10-26A9-4F5C-940F-546F74EAEDA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A309448-B226-498E-9299-284E37108CA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A309448-B226-498E-9299-284E37108CA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A309448-B226-498E-9299-284E37108CA7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3A309448-B226-498E-9299-284E37108CA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A309448-B226-498E-9299-284E37108CA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A309448-B226-498E-9299-284E37108CA7}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,6 @@
+﻿
+USE LARC
+GO
+
+DROP TABLE Address
+GO

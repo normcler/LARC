@@ -1,0 +1,11 @@
+﻿CREATE TABLE ClientDB
+(
+	ID INT IDENTITY(1,1) NOT NULL,
+	AccountID INT NOT NULL,
+	PortfolioID INT
+	CONSTRAINT PK_Client PRIMARY KEY (ID),
+	CONSTRAINT FK_Client_Account
+		FOREIGN KEY (AccountID) REFERENCES Account (ID),
+	CONSTRAINT FK_Client_Portfolio
+		FOREIGN KEY (PortfolioID) REFERENCES Portfolio (ID)
+)
