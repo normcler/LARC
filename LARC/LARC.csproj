@@ -251,13 +251,13 @@
     <Content Include="Views\Import\Index.cshtml" />
     <Content Include="Views\FundsOverlapTable\Index.cshtml" />
     <Content Include="Views\SalesReport\Index.cshtml" />
-    <Content Include="Views\Portfolio\Index.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\FundTable\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Client\" />
     <Folder Include="Views\PortfolioHolding\" />
+    <Folder Include="Views\Portfolio\" />
     <Folder Include="Views\SubscribeView\" />
   </ItemGroup>
   <ItemGroup>

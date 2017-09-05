@@ -5,9 +5,9 @@
 	CONSTRAINT PK_PortfolioPortfolioHoling 
 		PRIMARY KEY (PortfolioID, PortfolioHoldingSymbol),
 	CONSTRAINT FK_PortfolioPortfolioHolding_Portfolio
-		FOREIGN KEY (PortfolioID) REFERENCES Portfolio(ID)
+		FOREIGN KEY (PortfolioID) REFERENCES PortfolioDB(ID)
 		ON DELETE CASCADE,
 	CONSTRAINT FK_PortfolioPortfolioHolding_PortfolioHolding
-		FOREIGN KEY (PortfolioHoldingSymbol) REFERENCES Portfolio(Symbol)
+		FOREIGN KEY (PortfolioHoldingSymbol) REFERENCES PortfolioHolding(Symbol)
 		ON DELETE CASCADE
 )

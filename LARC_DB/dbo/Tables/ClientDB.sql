@@ -5,7 +5,7 @@
 	PortfolioID INT
 	CONSTRAINT PK_Client PRIMARY KEY (ID),
 	CONSTRAINT FK_Client_Account
-		FOREIGN KEY (AccountID) REFERENCES Account (ID),
+		FOREIGN KEY (AccountID) REFERENCES AccountDB (ID),
 	CONSTRAINT FK_Client_Portfolio
-		FOREIGN KEY (PortfolioID) REFERENCES Portfolio (ID)
+		FOREIGN KEY (PortfolioID) REFERENCES PortfolioDB (ID)
 )

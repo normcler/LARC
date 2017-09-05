@@ -13,8 +13,7 @@ namespace LARC.Controllers
     public ActionResult Index()
     {
       Client testClient = CreateTestClient();
-      //return View();
-      return RedirectToAction("Index", "Portfolio", testClient.ClientPortfolio);
+      return View(testClient.ClientPortfolio);
     }
 
     /// <summary>
