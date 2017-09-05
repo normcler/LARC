@@ -66,8 +66,14 @@
     <Build Include="dbo\Tables\AccountDB.sql" />
     <Build Include="dbo\Tables\PortfolioDB.sql" />
     <Build Include="dbo\Tables\ClientDB.sql" />
-    <Build Include="dbo\Tables\PortfolioHolding.sql" />
-    <Build Include="dbo\Tables\PortfolioPortfolioHolding.sql" />
+    <Build Include="dbo\Tables\Funds.sql" />
+    <Build Include="dbo\Tables\PortfolioFunds.sql" />
     <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
+    <PostDeploy Include="Scripts\LARC_Post.sql" />
+    <Build Include="dbo\Tables\Equities.sql" />
+    <Build Include="dbo\Tables\FundEquities.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="LARC_DB.refactorlog" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Equities]
+(
+	[Symbol] NVARCHAR(50) NOT NULL PRIMARY KEY,
+	[Name] NVARCHAR(100) NULL,
+	[Sector] NVARCHAR(100) NULL,
+	[Price] MONEY NOT NULL
+)

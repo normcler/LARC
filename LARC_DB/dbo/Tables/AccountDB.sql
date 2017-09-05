@@ -8,7 +8,7 @@
 	Email NVARCHAR(256) NOT NULL,
 	DateCreated DATETIME NOT NULL DEFAULT(GetUtcDate()),
 	ExpirationDate DATETIME NOT NULL 
-		DEFAULT(DATEADD(year, 1, GetDate())),
+		DEFAULT(DATEADD(year, 1, GetUtcDate())),
 	DateLastModified DATETIME NULL,
 	CONSTRAINT PK_Account PRIMARY KEY (ID),
 	CONSTRAINT FK_Account_HomeAddressID

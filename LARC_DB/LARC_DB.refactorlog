@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="aea8b728-afbc-468b-82b1-3f3ad5a0f10a" ChangeDateTime="09/05/2017 23:07:34">
+    <Property Name="ElementName" Value="[dbo].[PortfolioFunds].[PortfolioHoldingSymbol]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PortfolioFunds]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FundSymbol" />
+  </Operation>
+</Operations>
