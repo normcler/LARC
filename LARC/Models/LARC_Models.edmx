@@ -1,0 +1,572 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LARC_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountDB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HomeAddressID" Type="int" />
+          <Property Name="BillingAddressID" Type="int" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+          <Property Name="DateLastModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Line1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Line2" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ClientDB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="PortfolioID" Type="int" />
+        </EntityType>
+        <EntityType Name="Equities">
+          <Key>
+            <PropertyRef Name="Symbol" />
+          </Key>
+          <Property Name="Symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sector" Type="nvarchar" MaxLength="100" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Currency" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="FundEquities">
+          <Key>
+            <PropertyRef Name="FundSymbol" />
+            <PropertyRef Name="EquitySymbol" />
+          </Key>
+          <Property Name="FundSymbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EquitySymbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Weighting" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="Shares" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Funds">
+          <Key>
+            <PropertyRef Name="Symbol" />
+          </Key>
+          <Property Name="Symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PortfolioDB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PortfolioFunds">
+          <Key>
+            <PropertyRef Name="PortfolioID" />
+            <PropertyRef Name="FundSymbol" />
+          </Key>
+          <Property Name="PortfolioID" Type="int" Nullable="false" />
+          <Property Name="FundSymbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberOfShares" Type="decimal" Precision="10" Scale="3" />
+        </EntityType>
+        <Association Name="FK_Account_BillingAddress">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="AccountDB" Type="Self.AccountDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountDB">
+              <PropertyRef Name="BillingAddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_HomeAddressID">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="AccountDB" Type="Self.AccountDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountDB">
+              <PropertyRef Name="HomeAddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Account">
+          <End Role="AccountDB" Type="Self.AccountDB" Multiplicity="1" />
+          <End Role="ClientDB" Type="Self.ClientDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountDB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientDB">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Portfolio">
+          <End Role="PortfolioDB" Type="Self.PortfolioDB" Multiplicity="0..1" />
+          <End Role="ClientDB" Type="Self.ClientDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PortfolioDB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientDB">
+              <PropertyRef Name="PortfolioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FundEquities_Equities">
+          <End Role="Equities" Type="Self.Equities" Multiplicity="1" />
+          <End Role="FundEquities" Type="Self.FundEquities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equities">
+              <PropertyRef Name="Symbol" />
+            </Principal>
+            <Dependent Role="FundEquities">
+              <PropertyRef Name="EquitySymbol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FundEquities_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="FundEquities" Type="Self.FundEquities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Symbol" />
+            </Principal>
+            <Dependent Role="FundEquities">
+              <PropertyRef Name="FundSymbol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PortfolioFunds_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PortfolioFunds" Type="Self.PortfolioFunds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Symbol" />
+            </Principal>
+            <Dependent Role="PortfolioFunds">
+              <PropertyRef Name="FundSymbol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PortfolioFunds_Portfolio">
+          <End Role="PortfolioDB" Type="Self.PortfolioDB" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PortfolioFunds" Type="Self.PortfolioFunds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PortfolioDB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PortfolioFunds">
+              <PropertyRef Name="PortfolioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LARC_DBModelStoreContainer">
+          <EntitySet Name="AccountDB" EntityType="Self.AccountDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientDB" EntityType="Self.ClientDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equities" EntityType="Self.Equities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FundEquities" EntityType="Self.FundEquities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Funds" EntityType="Self.Funds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortfolioDB" EntityType="Self.PortfolioDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortfolioFunds" EntityType="Self.PortfolioFunds" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_BillingAddress" Association="Self.FK_Account_BillingAddress">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="AccountDB" EntitySet="AccountDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_HomeAddressID" Association="Self.FK_Account_HomeAddressID">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="AccountDB" EntitySet="AccountDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Account" Association="Self.FK_Client_Account">
+            <End Role="AccountDB" EntitySet="AccountDB" />
+            <End Role="ClientDB" EntitySet="ClientDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Portfolio" Association="Self.FK_Client_Portfolio">
+            <End Role="PortfolioDB" EntitySet="PortfolioDB" />
+            <End Role="ClientDB" EntitySet="ClientDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FundEquities_Equities" Association="Self.FK_FundEquities_Equities">
+            <End Role="Equities" EntitySet="Equities" />
+            <End Role="FundEquities" EntitySet="FundEquities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FundEquities_Funds" Association="Self.FK_FundEquities_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="FundEquities" EntitySet="FundEquities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PortfolioFunds_Funds" Association="Self.FK_PortfolioFunds_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="PortfolioFunds" EntitySet="PortfolioFunds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PortfolioFunds_Portfolio" Association="Self.FK_PortfolioFunds_Portfolio">
+            <End Role="PortfolioDB" EntitySet="PortfolioDB" />
+            <End Role="PortfolioFunds" EntitySet="PortfolioFunds" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LARC_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountDB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HomeAddressID" Type="Int32" />
+          <Property Name="BillingAddressID" Type="Int32" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateLastModified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Account_BillingAddress" FromRole="AccountDB" ToRole="Address" />
+          <NavigationProperty Name="Address1" Relationship="Self.FK_Account_HomeAddressID" FromRole="AccountDB" ToRole="Address" />
+          <NavigationProperty Name="ClientDBs" Relationship="Self.FK_Client_Account" FromRole="AccountDB" ToRole="ClientDB" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Line1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Line2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccountDBs" Relationship="Self.FK_Account_BillingAddress" FromRole="Address" ToRole="AccountDB" />
+          <NavigationProperty Name="AccountDBs1" Relationship="Self.FK_Account_HomeAddressID" FromRole="Address" ToRole="AccountDB" />
+        </EntityType>
+        <EntityType Name="ClientDB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="PortfolioID" Type="Int32" />
+          <NavigationProperty Name="AccountDB" Relationship="Self.FK_Client_Account" FromRole="ClientDB" ToRole="AccountDB" />
+          <NavigationProperty Name="PortfolioDB" Relationship="Self.FK_Client_Portfolio" FromRole="ClientDB" ToRole="PortfolioDB" />
+        </EntityType>
+        <EntityType Name="Equity">
+          <Key>
+            <PropertyRef Name="Symbol" />
+          </Key>
+          <Property Name="Symbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="FundEquities" Relationship="Self.FK_FundEquities_Equities" FromRole="Equities" ToRole="FundEquities" />
+          <Property Name="Currency" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FundEquity">
+          <Key>
+            <PropertyRef Name="FundSymbol" />
+            <PropertyRef Name="EquitySymbol" />
+          </Key>
+          <Property Name="FundSymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EquitySymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Weighting" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="Shares" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <NavigationProperty Name="Equity" Relationship="Self.FK_FundEquities_Equities" FromRole="FundEquities" ToRole="Equities" />
+          <NavigationProperty Name="Fund" Relationship="Self.FK_FundEquities_Funds" FromRole="FundEquities" ToRole="Funds" />
+        </EntityType>
+        <EntityType Name="Fund">
+          <Key>
+            <PropertyRef Name="Symbol" />
+          </Key>
+          <Property Name="Symbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FundEquities" Relationship="Self.FK_FundEquities_Funds" FromRole="Funds" ToRole="FundEquities" />
+          <NavigationProperty Name="PortfolioFunds" Relationship="Self.FK_PortfolioFunds_Funds" FromRole="Funds" ToRole="PortfolioFunds" />
+        </EntityType>
+        <EntityType Name="PortfolioDB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ClientDBs" Relationship="Self.FK_Client_Portfolio" FromRole="PortfolioDB" ToRole="ClientDB" />
+          <NavigationProperty Name="PortfolioFunds" Relationship="Self.FK_PortfolioFunds_Portfolio" FromRole="PortfolioDB" ToRole="PortfolioFunds" />
+        </EntityType>
+        <EntityType Name="PortfolioFund">
+          <Key>
+            <PropertyRef Name="PortfolioID" />
+            <PropertyRef Name="FundSymbol" />
+          </Key>
+          <Property Name="PortfolioID" Type="Int32" Nullable="false" />
+          <Property Name="FundSymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberOfShares" Type="Decimal" Precision="10" Scale="3" />
+          <NavigationProperty Name="Fund" Relationship="Self.FK_PortfolioFunds_Funds" FromRole="PortfolioFunds" ToRole="Funds" />
+          <NavigationProperty Name="PortfolioDB" Relationship="Self.FK_PortfolioFunds_Portfolio" FromRole="PortfolioFunds" ToRole="PortfolioDB" />
+        </EntityType>
+        <Association Name="FK_Account_BillingAddress">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="AccountDB" Type="Self.AccountDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountDB">
+              <PropertyRef Name="BillingAddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_HomeAddressID">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="AccountDB" Type="Self.AccountDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountDB">
+              <PropertyRef Name="HomeAddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Account">
+          <End Role="AccountDB" Type="Self.AccountDB" Multiplicity="1" />
+          <End Role="ClientDB" Type="Self.ClientDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountDB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientDB">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Portfolio">
+          <End Role="PortfolioDB" Type="Self.PortfolioDB" Multiplicity="0..1" />
+          <End Role="ClientDB" Type="Self.ClientDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PortfolioDB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientDB">
+              <PropertyRef Name="PortfolioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FundEquities_Equities">
+          <End Role="Equities" Type="Self.Equity" Multiplicity="1" />
+          <End Role="FundEquities" Type="Self.FundEquity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equities">
+              <PropertyRef Name="Symbol" />
+            </Principal>
+            <Dependent Role="FundEquities">
+              <PropertyRef Name="EquitySymbol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FundEquities_Funds">
+          <End Role="Funds" Type="Self.Fund" Multiplicity="1" />
+          <End Role="FundEquities" Type="Self.FundEquity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Symbol" />
+            </Principal>
+            <Dependent Role="FundEquities">
+              <PropertyRef Name="FundSymbol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PortfolioFunds_Funds">
+          <End Role="Funds" Type="Self.Fund" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PortfolioFunds" Type="Self.PortfolioFund" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Symbol" />
+            </Principal>
+            <Dependent Role="PortfolioFunds">
+              <PropertyRef Name="FundSymbol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PortfolioFunds_Portfolio">
+          <End Role="PortfolioDB" Type="Self.PortfolioDB" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PortfolioFunds" Type="Self.PortfolioFund" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PortfolioDB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PortfolioFunds">
+              <PropertyRef Name="PortfolioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LARC_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountDBs" EntityType="Self.AccountDB" />
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="ClientDBs" EntityType="Self.ClientDB" />
+          <EntitySet Name="Equities" EntityType="Self.Equity" />
+          <EntitySet Name="FundEquities" EntityType="Self.FundEquity" />
+          <EntitySet Name="Funds" EntityType="Self.Fund" />
+          <EntitySet Name="PortfolioDBs" EntityType="Self.PortfolioDB" />
+          <EntitySet Name="PortfolioFunds" EntityType="Self.PortfolioFund" />
+          <AssociationSet Name="FK_Account_BillingAddress" Association="Self.FK_Account_BillingAddress">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="AccountDB" EntitySet="AccountDBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_HomeAddressID" Association="Self.FK_Account_HomeAddressID">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="AccountDB" EntitySet="AccountDBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Account" Association="Self.FK_Client_Account">
+            <End Role="AccountDB" EntitySet="AccountDBs" />
+            <End Role="ClientDB" EntitySet="ClientDBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Portfolio" Association="Self.FK_Client_Portfolio">
+            <End Role="PortfolioDB" EntitySet="PortfolioDBs" />
+            <End Role="ClientDB" EntitySet="ClientDBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FundEquities_Equities" Association="Self.FK_FundEquities_Equities">
+            <End Role="Equities" EntitySet="Equities" />
+            <End Role="FundEquities" EntitySet="FundEquities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FundEquities_Funds" Association="Self.FK_FundEquities_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="FundEquities" EntitySet="FundEquities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PortfolioFunds_Funds" Association="Self.FK_PortfolioFunds_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="PortfolioFunds" EntitySet="PortfolioFunds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PortfolioFunds_Portfolio" Association="Self.FK_PortfolioFunds_Portfolio">
+            <End Role="PortfolioDB" EntitySet="PortfolioDBs" />
+            <End Role="PortfolioFunds" EntitySet="PortfolioFunds" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LARC_DBModelStoreContainer" CdmEntityContainer="LARC_DBEntities">
+          <EntitySetMapping Name="AccountDBs">
+            <EntityTypeMapping TypeName="LARC_DBModel.AccountDB">
+              <MappingFragment StoreEntitySet="AccountDB">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HomeAddressID" ColumnName="HomeAddressID" />
+                <ScalarProperty Name="BillingAddressID" ColumnName="BillingAddressID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="LARC_DBModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Line1" ColumnName="Line1" />
+                <ScalarProperty Name="Line2" ColumnName="Line2" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientDBs">
+            <EntityTypeMapping TypeName="LARC_DBModel.ClientDB">
+              <MappingFragment StoreEntitySet="ClientDB">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="PortfolioID" ColumnName="PortfolioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equities">
+            <EntityTypeMapping TypeName="LARC_DBModel.Equity">
+              <MappingFragment StoreEntitySet="Equities">
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sector" ColumnName="Sector" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FundEquities">
+            <EntityTypeMapping TypeName="LARC_DBModel.FundEquity">
+              <MappingFragment StoreEntitySet="FundEquities">
+                <ScalarProperty Name="FundSymbol" ColumnName="FundSymbol" />
+                <ScalarProperty Name="EquitySymbol" ColumnName="EquitySymbol" />
+                <ScalarProperty Name="Weighting" ColumnName="Weighting" />
+                <ScalarProperty Name="Shares" ColumnName="Shares" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Funds">
+            <EntityTypeMapping TypeName="LARC_DBModel.Fund">
+              <MappingFragment StoreEntitySet="Funds">
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortfolioDBs">
+            <EntityTypeMapping TypeName="LARC_DBModel.PortfolioDB">
+              <MappingFragment StoreEntitySet="PortfolioDB">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortfolioFunds">
+            <EntityTypeMapping TypeName="LARC_DBModel.PortfolioFund">
+              <MappingFragment StoreEntitySet="PortfolioFunds">
+                <ScalarProperty Name="PortfolioID" ColumnName="PortfolioID" />
+                <ScalarProperty Name="FundSymbol" ColumnName="FundSymbol" />
+                <ScalarProperty Name="NumberOfShares" ColumnName="NumberOfShares" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

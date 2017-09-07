@@ -97,11 +97,11 @@
       }
       ]);
 
-      @*var data2 = new google.visualization.DataTable();
+      var data2 = new google.visualization.DataTable();
       data2.addColumn('string', 'Category');
       data2.addColumn('number', 'Overlap');
 
-      data2.addRows([
+      @*data2.addRows([
       @{
         <text>['Overlapping', @totalOverlap]</text>
         <text>['Non-overlapping', @nonOverlap]</text>

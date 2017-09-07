@@ -9,11 +9,37 @@ namespace LARC.Controllers
 {
   public class ClientController : Controller
   {
+
+    private LARC_DBEntities db = new LARC_DBEntities();
+
     // GET: Client
-    public ActionResult Index()
+    public ActionResult Index(int? id)
     {
-      Client testClient = CreateTestClient();
-      return View(testClient.ClientPortfolio);
+      Portfolio model = null;
+      if(id == null)
+      {
+        model = CreateTestClient().ClientPortfolio;
+      }
+      else
+      {
+        var dbRecord = db.PortfolioDBs.Find(id);
+        model = new Portfolio(dbRecord.Name, 
+          dbRecord.PortfolioFunds.Select(x => new PortfolioHolding
+          {
+            Symbol = x.FundSymbol,
+            NumberOfShares = x.NumberOfShares ?? 0
+          }).ToList());
+      }
+      return View(model);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+      if (disposing)
+      {
+        db.Dispose();
+      }
+      base.Dispose(disposing);
     }
 
     /// <summary>

@@ -1,0 +1,18 @@
+﻿@using LARC.Models;
+@model Fund
+@{
+  ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<p>@Model.Symbol - @Model.Name</p>
+<table class="table">
+  @foreach (var equity in Model.FundEquities)
+  {
+    <tr>
+      <td>@equity.EquitySymbol</td>
+      <td>@equity.Shares</td>
+      <td>@equity.Weighting</td>
+  </tr>
+  }
+</table>

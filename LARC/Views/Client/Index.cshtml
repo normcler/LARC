@@ -20,8 +20,9 @@
         @foreach (var h in Model.PortfolioList)
         {
           <tr>
-            <td>@h.Symbol</td>
+            <td>@Html.ActionLink(h.Symbol, "Details", "Fund", new { id = h.Symbol }, null)</td>
             <td>@h.NumberOfShares</td>
+            
           </tr>
         }
       </tbody>

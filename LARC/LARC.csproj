@@ -52,6 +52,12 @@
     <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\packages\CsvHelper.2.16.3.0\lib\net45\CsvHelper.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
@@ -89,6 +95,8 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -148,6 +156,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\ClientDBsController.cs" />
+    <Compile Include="Controllers\FundController.cs" />
     <Compile Include="Controllers\FundsOverlapTableController.cs" />
     <Compile Include="Controllers\FundTableController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -160,12 +170,51 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AccountDB.cs">
+      <DependentUpon>LARC_Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Address.cs">
+      <DependentUpon>LARC_Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\ClientDB.cs">
+      <DependentUpon>LARC_Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Equity.cs">
+      <DependentUpon>LARC_Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fund.cs">
+      <DependentUpon>LARC_Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FundEquity.cs">
+      <DependentUpon>LARC_Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FundsOverlapTable.cs" />
     <Compile Include="Models\FundTable.cs" />
     <Compile Include="Models\FundTableRow.cs" />
     <Compile Include="Models\HoldingOverlap.cs" />
+    <Compile Include="Models\LARC_Models.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LARC_Models.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LARC_Models.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LARC_Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LARC_Models.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LARC_Models.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Portfolio.cs" />
+    <Compile Include="Models\PortfolioDB.cs">
+      <DependentUpon>LARC_Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PortfolioFund.cs">
+      <DependentUpon>LARC_Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PortfolioHolding.cs" />
     <Compile Include="Models\PortfolioOverlapTable.cs" />
     <Compile Include="Models\SalesReport.cs" />
@@ -217,7 +266,24 @@
     <Content Include="Content\FundsOverlapTable.less" />
     <Content Include="connectionStrings.config" />
     <Content Include="Content\SalesReport.less" />
+    <EntityDeploy Include="Models\LARC_Models.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LARC_Models.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\LARC_Models.edmx.diagram">
+      <DependentUpon>LARC_Models.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Models\LARC_Models.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LARC_Models.Context.cs</LastGenOutput>
+      <DependentUpon>LARC_Models.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\LARC_Models.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LARC_Models.edmx</DependentUpon>
+      <LastGenOutput>LARC_Models.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -253,6 +319,13 @@
     <Content Include="Views\SalesReport\Index.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\FundTable\Index.cshtml" />
+    <Content Include="Views\Fund\Index.cshtml" />
+    <Content Include="Views\Fund\Details.cshtml" />
+    <Content Include="Views\ClientDBs\Create.cshtml" />
+    <Content Include="Views\ClientDBs\Delete.cshtml" />
+    <Content Include="Views\ClientDBs\Details.cshtml" />
+    <Content Include="Views\ClientDBs\Edit.cshtml" />
+    <Content Include="Views\ClientDBs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -274,6 +347,9 @@
       <Project>{3ea80b10-26a9-4f5c-940f-546f74eaeda2}</Project>
       <Name>Morningstar.Importer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

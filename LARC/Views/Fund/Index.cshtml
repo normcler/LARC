@@ -1,0 +1,13 @@
+﻿@using LARC.Models;
+@model IEnumerable<Fund>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@foreach(var fund in Model)
+{
+  <p>@fund.Symbol</p>
+  <p>@fund.Name</p>
+}
+
