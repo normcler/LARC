@@ -1,0 +1,22 @@
+﻿@model  LARC.Models.Subscribe
+@{
+    ViewBag.Title = "Subscribe";
+}
+
+<h2>Subscription</h2>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1 col-md-6 col-xs-12">
+      @using (Html.BeginForm())
+      {
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+          <label>Subscription Term</label>
+          @Html.RadioButtonFor(model => model.years, "1 Year", true)
+          @Html.RadioButtonFor(model => model.years, "2 Years", false)
+          @Html.RadioButtonFor(model => model.years, "3 Years", false)
+        </div>
+      }
+    </div>
+  </div>
+</div>

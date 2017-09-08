@@ -18,7 +18,18 @@ namespace LARC.Controllers
       Portfolio model = null;
       if(id == null)
       {
-        model = CreateTestClient().ClientPortfolio;
+        // TODO:  The id here is canned to the value of 1.
+        //        As soon as we have a login set up, we will look up the client
+        //        in the database
+        ClientDB clientDB = db.ClientDBs.Find(1);
+        int? portfolioID = clientDB.PortfolioID ?? 0;
+        var dbRecord = db.PortfolioDBs.Find(portfolioID);
+        model = new Portfolio(dbRecord.Name,
+          dbRecord.PortfolioFunds.Select(x => new PortfolioHolding
+          {
+            Symbol = x.FundSymbol,
+            NumberOfShares = x.NumberOfShares ?? 0
+          }).ToList());
       }
       else
       {

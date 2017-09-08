@@ -69,6 +69,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PortfolioID" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="PortfolioFunds">
@@ -124,6 +125,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="ClientDB">
+              <PropertyRef Name="PortfolioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLientID">
+          <End Role="ClientDB" Type="Self.ClientDB" Multiplicity="0..1" />
+          <End Role="PortfolioDB" Type="Self.PortfolioDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientDB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PortfolioDB">
               <PropertyRef Name="PortfolioID" />
             </Dependent>
           </ReferentialConstraint>
@@ -205,6 +218,10 @@
             <End Role="PortfolioDB" EntitySet="PortfolioDB" />
             <End Role="ClientDB" EntitySet="ClientDB" />
           </AssociationSet>
+          <AssociationSet Name="FK_CLientID" Association="Self.FK_CLientID">
+            <End Role="ClientDB" EntitySet="ClientDB" />
+            <End Role="PortfolioDB" EntitySet="PortfolioDB" />
+          </AssociationSet>
           <AssociationSet Name="FK_FundEquities_Equities" Association="Self.FK_FundEquities_Equities">
             <End Role="Equities" EntitySet="Equities" />
             <End Role="FundEquities" EntitySet="FundEquities" />
@@ -264,6 +281,7 @@
           <Property Name="PortfolioID" Type="Int32" />
           <NavigationProperty Name="AccountDB" Relationship="Self.FK_Client_Account" FromRole="ClientDB" ToRole="AccountDB" />
           <NavigationProperty Name="PortfolioDB" Relationship="Self.FK_Client_Portfolio" FromRole="ClientDB" ToRole="PortfolioDB" />
+          <NavigationProperty Name="PortfolioDBs" Relationship="LARC_DBModel.FK_CLientID" FromRole="ClientDB" ToRole="PortfolioDB" />
         </EntityType>
         <EntityType Name="Equity">
           <Key>
@@ -305,6 +323,8 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ClientDBs" Relationship="Self.FK_Client_Portfolio" FromRole="PortfolioDB" ToRole="ClientDB" />
           <NavigationProperty Name="PortfolioFunds" Relationship="Self.FK_PortfolioFunds_Portfolio" FromRole="PortfolioDB" ToRole="PortfolioFunds" />
+          <Property Name="PortfolioID" Type="Int32" />
+          <NavigationProperty Name="ClientDB" Relationship="LARC_DBModel.FK_CLientID" FromRole="PortfolioDB" ToRole="ClientDB" />
         </EntityType>
         <EntityType Name="PortfolioFund">
           <Key>
@@ -458,7 +478,23 @@
             <End Role="PortfolioDB" EntitySet="PortfolioDBs" />
             <End Role="PortfolioFunds" EntitySet="PortfolioFunds" />
           </AssociationSet>
+          <AssociationSet Name="FK_CLientID" Association="LARC_DBModel.FK_CLientID">
+            <End Role="ClientDB" EntitySet="ClientDBs" />
+            <End Role="PortfolioDB" EntitySet="PortfolioDBs" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_CLientID">
+          <End Type="LARC_DBModel.ClientDB" Role="ClientDB" Multiplicity="0..1" />
+          <End Type="LARC_DBModel.PortfolioDB" Role="PortfolioDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientDB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PortfolioDB">
+              <PropertyRef Name="PortfolioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -532,6 +568,7 @@
           <EntitySetMapping Name="PortfolioDBs">
             <EntityTypeMapping TypeName="LARC_DBModel.PortfolioDB">
               <MappingFragment StoreEntitySet="PortfolioDB">
+                <ScalarProperty Name="PortfolioID" ColumnName="PortfolioID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>

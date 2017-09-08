@@ -21,6 +21,7 @@
         <AssociationConnector Association="LARC_DBModel.FK_FundEquities_Funds" ManuallyRouted="false" />
         <AssociationConnector Association="LARC_DBModel.FK_PortfolioFunds_Funds" ManuallyRouted="false" />
         <AssociationConnector Association="LARC_DBModel.FK_PortfolioFunds_Portfolio" ManuallyRouted="false" />
+        <AssociationConnector Association="LARC_DBModel.FK_CLientID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
