@@ -6,26 +6,37 @@
 
 @{
   if (!Model.Equals(null)) {
-    <table class="table-condensed table-striped table-bordered">
-      <caption>
-        Portfolio Holdings for the Portfolio
-      </caption>
-      <thead>
-        <tr>
-          <th>Symbol</th>
-          <th>Shares</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach (var h in Model.PortfolioList)
-        {
-          <tr>
-            <td>@Html.ActionLink(h.Symbol, "Details", "Fund", new { id = h.Symbol }, null)</td>
-            <td>@h.NumberOfShares</td>
-            
-          </tr>
-        }
-      </tbody>
-    </table>
+    <h2>Portfolio Analysis Control Panel</h2>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-offset-1 col-md-5 col-xs-12">
+          <table class="table-condensed table-striped table-bordered">
+            <caption>
+              Portfolio Holdings for the Portfolio @Model.Name
+            </caption>
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var h in Model.PortfolioList)
+              {
+                <tr>
+                  <td>
+                    @Html.ActionLink(h.Symbol, "Details", "Fund",
+                 new { id = h.Symbol}, new { data_toggle = "tooltip", title = h.Symbol })
+                </td>
+                <td>@h.NumberOfShares</td>
+
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+
   }
 }

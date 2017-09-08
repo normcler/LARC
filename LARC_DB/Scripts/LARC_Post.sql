@@ -9,11 +9,7 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-INSERT INTO Address (Line1, Line2, PostalCode) 
-	VALUES ('360 E. Randolph St. Apt. 408',
-					'Chicago, IL', '60601')
 
-INSERT INTO PortfolioDB (Name) VALUES ('test_portfolio')
 
 INSERT INTO Funds (Symbol) VALUES 
 ('FPMAX'), 
@@ -29,8 +25,27 @@ INSERT INTO Funds (Symbol) VALUES
 ('VTMSX'), 
 ('VTRIX')
 
+
+INSERT INTO Address (Line1, Line2, PostalCode) 
+	VALUES ('360 E. Randolph St. Apt. 408',
+					'Chicago, IL', '60601')
+
+DECLARE @AddressID INT;
+SET @AddressID = (SELECT MAX(ID) FROM Address WHERE Line1 = '360 E. Randolph St. Apt. 408')
+
+
+INSERT INTO AccountDB (HomeAddressID, BillingAddressID, FirstName, LastName, Email)
+	VALUES (@AddressID, @AddressID, 'Norman', 'Clerman', 'norm.clerman@gmail.com')
+
+INSERT INTO ClientDB (AccountID, PortfolioID) VALUES ((SELECT ID FROM AccountDB WHERE Email ='norm.clerman@gmail.com'), 1)
+
+DECLARE @accountID INT
+SET @accountID = ((SELECT MAX(ID) FROM ClientDB))
+
+INSERT INTO PortfolioDB (Name, ClientID) VALUES ('test_portfolio', @accountID)
+
 DECLARE @portfolioId INT
-SET @portfolioId = (SELECT ID FROM PortfolioDB WHERE Name = 'test_portfolio')
+SET @portfolioId = (SELECT MAX(ID) FROM PortfolioDB WHERE Name = 'test_portfolio')
 
 INSERT INTO PortfolioFunds (PortfolioID, FundSymbol, NumberOfShares) VALUES 
 (@portfolioId, 'FPMAX', 3766.487),
@@ -45,8 +60,3 @@ INSERT INTO PortfolioFunds (PortfolioID, FundSymbol, NumberOfShares) VALUES
 (@portfolioId, 'VPADX', 186.273),
 (@portfolioId, 'VTMSX', 693.775),
 (@portfolioId, 'VTRIX', 560.45)
-
-INSERT INTO AccountDB (HomeAddressID, BillingAddressID, FirstName, LastName, Email)
-	VALUES (1, 1, 'Norman', 'Clerman', 'norm.clerman@gmail.com')
-
-INSERT INTO ClientDB (AccountID, PortfolioID) VALUES (1, 1)

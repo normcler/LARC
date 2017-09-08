@@ -51,6 +51,7 @@ namespace LARC.Models
     /// </param>
     public Portfolio (string name, List<PortfolioHolding> portfolioSymbolList)
     {
+      this.Name = name;
       this.PortfolioList = portfolioSymbolList;
       this.PortfolioDictionary = new Dictionary<string, List<Holding>>();
       /*

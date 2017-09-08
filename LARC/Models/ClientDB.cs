@@ -25,7 +25,6 @@ namespace LARC.Models
         public Nullable<int> PortfolioID { get; set; }
     
         public virtual AccountDB AccountDB { get; set; }
-        public virtual PortfolioDB PortfolioDB { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PortfolioDB> PortfolioDBs { get; set; }
     }

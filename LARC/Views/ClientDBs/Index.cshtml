@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.AccountDB.LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PortfolioDB.Name)
+            @Html.DisplayNameFor(model => model.PortfolioID)
         </th>
         <th></th>
     </tr>
@@ -26,8 +26,17 @@
             @Html.DisplayFor(modelItem => item.AccountDB.LastName)
         </td>
         <td>
-            @Html.ActionLink(item.PortfolioDB.Name, "Index", "Client", new { id = item.PortfolioID }, null)
-            
+            @if (item.PortfolioDBs.Any())
+            {
+            @Html.ActionLink(
+                            (item.PortfolioID != null ? item.PortfolioDBs.FirstOrDefault(x => x.ID == item.PortfolioID).Name : item.PortfolioDBs.FirstOrDefault().Name)
+                            , "Index", "Client", new { id = (item.PortfolioID != null ? item.PortfolioDBs.FirstOrDefault(x => x.ID == item.PortfolioID).ID : item.PortfolioDBs.FirstOrDefault().ID) }, null)
+            }
+            else
+            {
+              <span>No Portfolio</span>
+            }
+
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

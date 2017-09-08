@@ -20,16 +20,31 @@ namespace LARC.Controllers
       {
         // TODO:  The id here is canned to the value of 1.
         //        As soon as we have a login set up, we will look up the client
-        //        in the database
-        ClientDB clientDB = db.ClientDBs.Find(1);
-        int? portfolioID = clientDB.PortfolioID ?? 0;
-        var dbRecord = db.PortfolioDBs.Find(portfolioID);
-        model = new Portfolio(dbRecord.Name,
-          dbRecord.PortfolioFunds.Select(x => new PortfolioHolding
-          {
-            Symbol = x.FundSymbol,
-            NumberOfShares = x.NumberOfShares ?? 0
-          }).ToList());
+        //        in the database. The number here is 2 because we modified the
+        //        database and the only client now has an id of 2.
+        ClientDB clientDB = db.ClientDBs.Find(2);
+        int? portfolioID = (clientDB.PortfolioID != null ? 
+          clientDB.PortfolioID : clientDB.PortfolioDBs.FirstOrDefault().ID);
+        if (portfolioID != null)
+        {
+          //  Note how this works: The portfolioID is the id of a portfolio in
+          //  PortfolioDB table. We obtain the database record corresponding to
+          //  this id. The PortfolioDB class has a name and a collection of
+          //  objects of class PortfolioFund. This class was formed from a join
+          //  table in the database that was created by the entity framework.
+          //  The PortfolioFund class comprises the fund symbol and the number
+          //  of shares.
+
+          //  Also note that this is calling one of the constructors of the
+          //  Portfolio class. This causes all the data to be imported.
+          var dbRecord = db.PortfolioDBs.Find(portfolioID);
+          model = new Portfolio(dbRecord.Name,
+            dbRecord.PortfolioFunds.Select(x => new PortfolioHolding
+            {
+              Symbol = x.FundSymbol,
+              NumberOfShares = x.NumberOfShares ?? 0
+            }).ToList());
+        }
       }
       else
       {

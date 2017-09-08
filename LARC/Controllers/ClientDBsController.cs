@@ -17,7 +17,7 @@ namespace LARC.Controllers
         // GET: ClientDBs
         public ActionResult Index()
         {
-            var clientDBs = db.ClientDBs.Include(c => c.AccountDB).Include(c => c.PortfolioDB);
+            var clientDBs = db.ClientDBs.Include(c => c.AccountDB);
             return View(clientDBs.ToList());
         }
 

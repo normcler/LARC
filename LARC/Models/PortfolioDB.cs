@@ -17,18 +17,15 @@ namespace LARC.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PortfolioDB()
         {
-            this.ClientDBs = new HashSet<ClientDB>();
             this.PortfolioFunds = new HashSet<PortfolioFund>();
         }
     
         public int ID { get; set; }
+        public Nullable<int> ClientID { get; set; }
         public string Name { get; set; }
-        public Nullable<int> PortfolioID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientDB> ClientDBs { get; set; }
+        public virtual ClientDB ClientDB { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PortfolioFund> PortfolioFunds { get; set; }
-        public virtual ClientDB ClientDB { get; set; }
     }
 }
