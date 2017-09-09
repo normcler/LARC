@@ -57,7 +57,9 @@
                 <tr>
                   <td>
                     @Html.ActionLink(h.Symbol, "Details", "Fund",
-                 new { id = h.Symbol}, new { data_toggle = "tooltip", title = h.Name, data_placement = "left" })
+                      new { id = h.Symbol},
+                      new { data_toggle = "tooltip", title = h.Name,
+                        data_placement = "left" })
                 </td>
                 <td>@h.NumberOfShares</td>
 

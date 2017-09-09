@@ -29,37 +29,36 @@ namespace LARC.Controllers
           clientDB.PortfolioID : clientDB.PortfolioDBs.FirstOrDefault().ID);
         if (portfolioID != null)
         {
-          //  Note how this works: The portfolioID is the id of a portfolio in
-          //  PortfolioDB table. We obtain the database record corresponding to
-          //  this id. The PortfolioDB class has a name and a collection of
-          //  objects of class PortfolioFund. This class was formed from a join
-          //  table in the database that was created by the entity framework.
-          //  The PortfolioFund class comprises the fund symbol and the number
-          //  of shares.
-
-          //  Also note that this is calling one of the constructors of the
-          //  Portfolio class. This causes all the data to be imported.
-          var dbRecord = db.PortfolioDBs.Find(portfolioID);
-          model = new Portfolio(dbRecord.Name,
-            dbRecord.PortfolioFunds.Select(x => new PortfolioHolding
-            {
-              Symbol = x.FundSymbol,
-              NumberOfShares = x.NumberOfShares ?? 0,
-              Name = x.Fund.Name
-            }).ToList());
+          model = BuildPortfolio(portfolioID);
         }
       }
       else
       {
-        var dbRecord = db.PortfolioDBs.Find(id);
-        model = new Portfolio(dbRecord.Name, 
-          dbRecord.PortfolioFunds.Select(x => new PortfolioHolding
-          {
-            Symbol = x.FundSymbol,
-            NumberOfShares = x.NumberOfShares ?? 0
-          }).ToList());
+        model = BuildPortfolio(id);
       }
       return View(model);
+    }
+
+    public Portfolio BuildPortfolio (int? id)
+    {
+      //  Note how this works: The portfolioID is the id of a portfolio in
+      //  PortfolioDB table. We obtain the database record corresponding to
+      //  this id. The PortfolioDB class has a name and a collection of
+      //  objects of class PortfolioFund. This class was formed from a join
+      //  table in the database that was created by the entity framework.
+      //  The PortfolioFund class comprises the fund symbol and the number
+      //  of shares.
+
+      //  Also note that this is calling one of the constructors of the
+      //  Portfolio class. This causes all the data to be imported.
+      var dbRecord = db.PortfolioDBs.Find(id);
+      Portfolio model = new Portfolio(dbRecord.Name,
+        dbRecord.PortfolioFunds.Select(x => new PortfolioHolding
+        {
+          Symbol = x.FundSymbol,
+          NumberOfShares = x.NumberOfShares ?? 0
+        }).ToList());
+      return model;
     }
 
     protected override void Dispose(bool disposing)
