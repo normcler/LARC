@@ -33,7 +33,7 @@
                   {
                   @Html.ActionLink(
                                   (item.PortfolioID != null ? item.PortfolioDBs.FirstOrDefault(x => x.ID == item.PortfolioID).Name : item.PortfolioDBs.FirstOrDefault().Name)
-                                  , "Index", "Client", new { id = (item.PortfolioID != null ? item.PortfolioDBs.FirstOrDefault(x => x.ID == item.PortfolioID).ID : item.PortfolioDBs.FirstOrDefault().ID) }, null)
+                                  , "Index", "Portfolio", new { id = (item.PortfolioID != null ? item.PortfolioDBs.FirstOrDefault(x => x.ID == item.PortfolioID).ID : item.PortfolioDBs.FirstOrDefault().ID) }, null)
                   }
                   else
                   {
