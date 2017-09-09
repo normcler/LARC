@@ -72,6 +72,15 @@ namespace LARC.Models
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    //public Portfolio ImportEquities (string name,
+    //  List<PortfolioHolding> portfolioSymbolList)
+    //{
+      
+    //}
+
+    /// <summary>
     ///   Compute the total overlap between two funds in a portfolio.
     /// </summary>
     /// <param name="fundSymbol_1">The symbol of the first fund</param>

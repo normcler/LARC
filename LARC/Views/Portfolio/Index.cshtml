@@ -27,14 +27,14 @@
         <h4>Actions</h4>
         <ul class="nav navbar-nav larc-theme" id="functions">
           <li class="page-option">@Html.ActionLink("Create New", "Create", "Portfolio")</li>
-          <li class="page-option">@Html.ActionLink("Edit", "Edit", "Portfolio", new { id = @Model})</li>
+          <li class="page-option">@Html.ActionLink("Edit", "Edit", "Portfolio", new { id = @Model })</li>
           <li class="page-option">@Html.ActionLink("Delete", "Delete", "Portfolio")</li>
         </ul>
         <h4>Displays</h4>
         <ul class="nav navbar-nav larc-theme" id="displays">
           <li class="page-option"><a href="#">Overlap Plot</a></li>
         </ul>
-</div>
+      </div>
     </div>
 
     // Table to list a portfolio
@@ -57,17 +57,17 @@
                 <tr>
                   <td>
                     @Html.ActionLink(h.Symbol, "Details", "Fund",
-                 new { id = h.Symbol}, new { data_toggle = "tooltip", title = h.Name, data_placement = "left" })
-                </td>
-                <td>@h.NumberOfShares</td>
+                 new { id = h.Symbol }, new { data_toggle = "tooltip", title = h.Name, data_placement = "left" })
+                  </td>
+                  <td>@h.NumberOfShares</td>
 
-              </tr>
+                </tr>
               }
             </tbody>
           </table>
         </div>
+      </div>
     </div>
-  </div>
 
   }
 }
@@ -76,5 +76,5 @@
       $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip()
       });
-</script>
+  </script>
 }

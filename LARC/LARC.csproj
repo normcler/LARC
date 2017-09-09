@@ -270,6 +270,7 @@
     <Content Include="Content\index.min.css">
       <DependentUpon>index.css</DependentUpon>
     </Content>
+    <Content Include="Content\Portfolio.css" />
     <Content Include="Content\SalesReport.css">
       <DependentUpon>SalesReport.less</DependentUpon>
     </Content>
@@ -362,12 +363,12 @@
     <Content Include="Views\Index.cshtml" />
     <Content Include="Views\Subscribe\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Portfolio\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\FileImport\" />
     <Folder Include="Views\PortfolioHolding\" />
-    <Folder Include="Views\Portfolio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

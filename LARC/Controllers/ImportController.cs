@@ -16,16 +16,24 @@ namespace LARC.Controllers
     }
 
     [HttpPost]
-    public ActionResult Index(HttpPostedFileBase file, string ticker)
+    public ActionResult Index(HttpPostedFileBase file, string symbol)
     {
       string fileName = System.IO.Path.GetFileName(file.FileName);
       System.IO.Directory.CreateDirectory(Server.MapPath("~/Temp"));
       file.SaveAs(Server.MapPath("~/Temp/" + fileName));
 
-      var equities = Morningstar.Importer.FundFileImporter.Import(Server.MapPath("~/Temp/" + fileName), ticker);
+      // This brings in a list of equities from the .csv file. 
+      // Each contains many properties as described in the Holding class in the
+      // Morningstar Importer.
+      var equities = Morningstar.Importer.FundFileImporter.Import(Server.MapPath("~/Temp/" + fileName), symbol);
+
+      // We are adding an object of class Fund.
+      // It contains the following properties:
+      // string Symbol - the fund symbol.
+      // ICollection<FundEquity> - collection of class FundEquity.
       db.Funds.Add(new Fund
       {
-        Symbol = ticker, 
+        Symbol = symbol, 
 
         FundEquities = equities.Where(x=> x.Name != "-" && !db.Equities.Select(y => y.Name).Contains(x.Name)).Select(x => new FundEquity
         {
@@ -42,7 +50,6 @@ namespace LARC.Controllers
       db.SaveChanges();
 
 
-      //TODO: Save this fund to the database!
       return RedirectToAction("Index", "Home");
 
     }
