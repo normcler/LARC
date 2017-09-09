@@ -13,12 +13,13 @@ namespace LARC.Models
   /// </summary>
   public class PortfolioHolding
   {
-    //[Display(Name = "Symbol")]
+    [Display(Name = "Symbol")]
     public string Symbol { get; set; }
 
-    //[Display(Name = "Shares")]
+    [Display(Name = "Shares")]
     public decimal NumberOfShares { get; set; }
 
+    [Display(Name = "Name")]
     public string Name { get; set; }
 
     public PortfolioHolding ()
@@ -26,6 +27,7 @@ namespace LARC.Models
       // Note: We do not need the name. It will be available when we read
       // in the fund file.
       // Also, the primary key should be the symbol.
+      this.Name = "";
       this.Symbol = "";
       this.NumberOfShares = 0.0m;
     }

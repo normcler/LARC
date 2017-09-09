@@ -52,6 +52,7 @@ namespace LARC.Controllers
       Portfolio model = new Portfolio(dbRecord.Name,
         dbRecord.PortfolioFunds.Select(x => new PortfolioHolding
         {
+          //Name = db.Funds.Select(y => y.Name.Where(y.Symbol.Equals(x.FundSymbol)),
           Symbol = x.FundSymbol,
           NumberOfShares = x.NumberOfShares ?? 0
         }).ToList());
