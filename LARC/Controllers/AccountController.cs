@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
-
+using LARC.Models;
 
 namespace LARC.Controllers
 {
@@ -33,7 +33,7 @@ namespace LARC.Controllers
 
     // POST: Register
     [HttpPost]
-    public ActionResult Register(string username, string password)
+    public ActionResult Register(SubscribeViewModel model)
     {
       // Include these at the top:
       // using Microsoft.AspNet.Identity;
@@ -42,11 +42,14 @@ namespace LARC.Controllers
 
       var manager = HttpContext.GetOwinContext().GetUserManager<UserManager<IdentityUser>>();
 
-      IdentityUser newuser = new IdentityUser(username);
+      IdentityUser newuser = new IdentityUser(model.Email);
+      newuser.Email = model.Email;
+      //newuser.FirstName = model.FirstName;
+      //newuser.LastName = model.LastName;
       // This can fail -
       // password might not be complex enough
 
-     IdentityResult result = manager.Create(newuser, password);
+     IdentityResult result = manager.Create(newuser, model.Password);
       if (!result.Succeeded)
       {
         ViewBag.Errors = result.Errors;

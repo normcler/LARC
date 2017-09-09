@@ -62,10 +62,11 @@ namespace LARC.Models
       foreach (PortfolioHolding item in portfolioSymbolList)
       {
         /// TODO: Obtain this file from an API.
-        List<Holding> rawList = Morningstar.Importer.FundFileImporter.
+        // The filtering is done in the Morningstar importer, not here.
+        List<Holding> equityList = Morningstar.Importer.FundFileImporter.
             Import(FILE_REPO, item.Symbol);
-        List<Holding> equityList = 
-          rawList.Where(x => (x.IsEquityHolding() && x.HasTicker())).ToList();
+        //List<Holding> equityList = 
+          //rawList.Where(x => (x.IsEquityHolding() && x.HasTicker())).ToList();
         this.PortfolioDictionary[item.Symbol] = equityList;
       }
     }

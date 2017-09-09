@@ -19,6 +19,8 @@ namespace LARC.Models
     //[Display(Name = "Shares")]
     public decimal NumberOfShares { get; set; }
 
+    public string Name { get; set; }
+
     public PortfolioHolding ()
     {
       // Note: We do not need the name. It will be available when we read

@@ -46,16 +46,14 @@ namespace Morningstar.Importer
                 var fund_csv = new CsvReader(reader);
                 fund_csv.Configuration.RegisterClassMap<HoldingMap>();
                 fund_csv.Configuration.HasHeaderRecord = true;
-                // Code to read the file record by record.
-                /*while (fund_csv.Read())
-                {
-                    Holding record = fund_csv.GetRecord<Holding>();
-                    result.Add(record);
-                }*/
 
-                // Code to read all the records. (This requires Linq)
-                result = fund_csv.GetRecords<Holding>().ToList();
-                return result;
+        // Code to read all the records. (This requires Linq)
+        // After initial read, filter the list.
+        List<Holding> rawlist = fund_csv.GetRecords<Holding>().ToList();
+        result = rawlist.Where(x => (x.IsEquityHolding() && x.HasTicker())).ToList();
+
+        //result = fund_csv.GetRecords<Holding>().ToList();
+        return result;
             }
         }
 

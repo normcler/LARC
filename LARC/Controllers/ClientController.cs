@@ -42,7 +42,8 @@ namespace LARC.Controllers
             dbRecord.PortfolioFunds.Select(x => new PortfolioHolding
             {
               Symbol = x.FundSymbol,
-              NumberOfShares = x.NumberOfShares ?? 0
+              NumberOfShares = x.NumberOfShares ?? 0,
+              Name = x.Fund.Name
             }).ToList());
         }
       }

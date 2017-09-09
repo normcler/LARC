@@ -9,41 +9,47 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AccountDB.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PortfolioID)
-        </th>
-        <th></th>
-    </tr>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-offset-3 col-md-6 col-xs-12">
+      <table class="table">
+          <tr>
+              <th>
+                  @Html.DisplayNameFor(model => model.AccountDB.LastName)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.PortfolioID)
+              </th>
+              <th></th>
+          </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccountDB.LastName)
-        </td>
-        <td>
-            @if (item.PortfolioDBs.Any())
-            {
-            @Html.ActionLink(
-                            (item.PortfolioID != null ? item.PortfolioDBs.FirstOrDefault(x => x.ID == item.PortfolioID).Name : item.PortfolioDBs.FirstOrDefault().Name)
-                            , "Index", "Client", new { id = (item.PortfolioID != null ? item.PortfolioDBs.FirstOrDefault(x => x.ID == item.PortfolioID).ID : item.PortfolioDBs.FirstOrDefault().ID) }, null)
-            }
-            else
-            {
-              <span>No Portfolio</span>
-            }
+      @foreach (var item in Model) {
+          <tr>
+              <td>
+                  @Html.DisplayFor(modelItem => item.AccountDB.LastName)
+              </td>
+              <td>
+                  @if (item.PortfolioDBs.Any())
+                  {
+                  @Html.ActionLink(
+                                  (item.PortfolioID != null ? item.PortfolioDBs.FirstOrDefault(x => x.ID == item.PortfolioID).Name : item.PortfolioDBs.FirstOrDefault().Name)
+                                  , "Index", "Client", new { id = (item.PortfolioID != null ? item.PortfolioDBs.FirstOrDefault(x => x.ID == item.PortfolioID).ID : item.PortfolioDBs.FirstOrDefault().ID) }, null)
+                  }
+                  else
+                  {
+                    <span>No Portfolio</span>
+                  }
 
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+              </td>
+              <td>
+                  @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                  @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                  @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+              </td>
+          </tr>
+      }
 
-</table>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+﻿.jumbotron {
+    background-image: url(/Content/wall-street.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: gold;
+    padding: 200px 0;
+}
+#main {
+    padding: 3em 0 2em 0;
+    background-color: darkslategray;
+    border-radius: 1em;
+    font-family: 'Roboto Slab', serif;
+    opacity: 0.8;
+}
+
+#main h1 {
+    text-align: center;
+    opacity: 1;
+}
+
+#main p {
+    padding: 2em;
+}
+
+#main p a {
+    background-color: gold;
+    color: darkslategray;
+    font-size: 0.9em;
+}
+
+#main p a:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.lead {
+    opacity: 1;
+}
+

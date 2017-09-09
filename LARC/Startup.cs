@@ -9,6 +9,7 @@ using Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using LARC.Models;
 
 //This is an assembly decorator - it adds some metadata
 //to the DLL to indicate what the startup class is called.

@@ -263,6 +263,7 @@
     <Content Include="Content\FundsOverlapTable.min.css">
       <DependentUpon>FundsOverlapTable.css</DependentUpon>
     </Content>
+    <Content Include="Content\Home.css" />
     <Content Include="Content\index.css">
       <DependentUpon>index.less</DependentUpon>
     </Content>
@@ -275,6 +276,7 @@
     <Content Include="Content\SalesReport.min.css">
       <DependentUpon>SalesReport.css</DependentUpon>
     </Content>
+    <Content Include="Content\wall-street.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -363,6 +365,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\FileImport\" />
     <Folder Include="Views\PortfolioHolding\" />
     <Folder Include="Views\Portfolio\" />
   </ItemGroup>
