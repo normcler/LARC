@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LARC.Models;
+using Morningstar.Importer;
 
 namespace LARC.Controllers
 {
@@ -49,12 +50,70 @@ namespace LARC.Controllers
       //  Also note that this is calling one of the constructors of the
       //  Portfolio class. This causes all the data to be imported.
       var dbRecord = db.PortfolioDBs.Find(id);
-      Portfolio model = new Portfolio(dbRecord.Name,
+      List<PortfolioHolding> holdingList = 
         dbRecord.PortfolioFunds.Select(x => new PortfolioHolding
         {
           Symbol = x.FundSymbol,
           NumberOfShares = x.NumberOfShares ?? 0
-        }).ToList());
+        }).ToList();
+      Portfolio model = new Portfolio(dbRecord.Name,
+        holdingList);
+        //dbRecord.PortfolioFunds.Select(x => new PortfolioHolding
+        //{
+        //  Symbol = x.FundSymbol,
+        //  NumberOfShares = x.NumberOfShares ?? 0
+        //}).ToList());
+      Dictionary<string, List<Holding>> dictionary = model.PortfolioDictionary;
+      foreach (string key in dictionary.Keys)
+      {
+        List<Holding> importEquities = dictionary[key];
+        List<Holding> newEquities = new List<Holding>();
+
+        // This did not work - why?
+        //var newEquities = importEquities.Where(e => e.Ticker != "" &&
+        //  !db.Equities.Select(y => y.Symbol).Contains(e.Ticker));
+        var dbEquities = db.Equities;
+        foreach (Holding equity in importEquities)
+        {
+          // Do not include this equity if it is already in the Equities
+          // database or it has already been included in this list.
+          // (An instance of the second occured in fund FPMAX: there were two 
+          //  instances of equity SBER, a Russian bank called SBERBANK. The 
+          //  equity names were very slightly different.)
+
+          if (dbEquities.Any(e => e.Symbol == equity.Ticker) ||
+             (newEquities.Any(n => n.Ticker == equity.Ticker)))
+          {
+            continue;
+          }
+          else
+          {
+            newEquities.Add(equity);
+          }
+        }
+        List<FundEquity> fundEquityList = new List<FundEquity>();
+        foreach (Holding equity in newEquities)
+        {
+          FundEquity fundEquity = new FundEquity
+          {
+            FundSymbol = key,
+            EquitySymbol = equity.Ticker,
+            Shares = equity.SharesOwned ?? 0,
+            Weighting = equity.Weighting ?? 0,
+            Equity = new Equity
+            {
+              Name = equity.Name,
+              Price = equity.Price ?? 0,
+              Symbol = equity.Ticker,
+              Sector = equity.Sector,
+              Currency = equity.Currency
+            }
+          };
+          db.FundEquities.Add(fundEquity);
+          fundEquityList.Add(fundEquity);
+        }
+        db.SaveChanges();
+      }
       return model;
     }
 

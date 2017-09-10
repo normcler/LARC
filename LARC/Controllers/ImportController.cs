@@ -33,7 +33,7 @@ namespace LARC.Controllers
       // ICollection<FundEquity> - collection of class FundEquity.
       db.Funds.Add(new Fund
       {
-        Symbol = symbol, 
+        Symbol = symbol,
 
         FundEquities = equities.Where(x=> x.Name != "-" && 
         !db.Equities.Select(y => y.Name).Contains(x.Name)).Select(x => new FundEquity
