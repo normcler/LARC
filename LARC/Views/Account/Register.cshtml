@@ -3,43 +3,48 @@
     ViewBag.Title = "Register";
 }
 
+@section Includes {
+  <link href="~/Content/Register.css"
+        rel="stylesheet"
+        type="text/css" />
+}
 
-
-
-
+<ul class="nav nav-pills larc-theme">
+  <li>@Html.ActionLink("Home", "Index", "Home")</li>
+</ul>
 
 <div class="container-fluid">
   <div class="row">
-      <div class="col-md-offset-3 col-md-6 col-xs-12">
+    <div class="col-md-offset-2 col-md-8 col-xs-12">
       <h2>Register</h2>
       @using (Html.BeginForm( new {@class="form-horizontal"}))
       {
       <div class="form-group">
-        @Html.LabelFor(m => m.Email)
-        @Html.TextBoxFor(m => m.Email)
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label"})
+        @Html.TextBoxFor(m => m.Email, new { type = "email", @class = "col-md-4 form-control"})
       </div>
 
       <div class="form-group">
-        @Html.LabelFor(m => m.FirstName)
-        @Html.TextBoxFor(m => m.FirstName)
+        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "col-md-4 form-control"})
       </div>
 
       <div class="form-group">
-        @Html.LabelFor(m => m.LastName)
-        @Html.TextBoxFor(m => m.LastName)
+        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+        @Html.TextBoxFor(m => m.LastName, new { @class = "col-md-4 form-control"})
       </div>
 
       <div class="form-group">
-        @Html.LabelFor(m => m.Password)
-        @Html.TextBoxFor(m => m.Password)
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label"})
+        @Html.TextBoxFor(m => m.Password, new { type = "password", @class = "col-md-4 form-control"})
       </div>
 
       <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword)
-        @Html.TextBoxFor(m => m.ConfirmPassword)
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label"})
+        @Html.TextBoxFor(m => m.ConfirmPassword, new { type = "password", @class= "col-md-4 form-control"})
       </div>
         <input type="submit" value="Register" />
       }
-    </div>
+     </div>
    </div>
 </div>

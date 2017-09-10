@@ -1,0 +1,18 @@
+﻿@model LARC.Models.Portfolio
+
+@{
+  ViewBag.Title = "Create";
+}
+
+<h2>Create A New Portfolio</h2>
+<div class="container-fluid">
+  @using (Html.BeginForm("Create", "Portfolio", new { @class = "form-horizontal" }))
+  {
+
+    for (int i = 0; i < 25; i++)
+    {
+      <label></label>
+    }
+  }
+</div>
+

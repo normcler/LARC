@@ -35,8 +35,12 @@ namespace LARC.Controllers
       {
         Symbol = symbol, 
 
-        FundEquities = equities.Where(x=> x.Name != "-" && !db.Equities.Select(y => y.Name).Contains(x.Name)).Select(x => new FundEquity
+        FundEquities = equities.Where(x=> x.Name != "-" && 
+        !db.Equities.Select(y => y.Name).Contains(x.Name)).Select(x => new FundEquity
         {
+          // Shares - shares owned by the mutual fund, not the number of 
+          //          shares in the portfolio.
+          // Weighting - the weighting of the equity in the fund.
           Shares = x.SharesOwned ?? 0,
           Weighting = x.Weighting ?? 0,
           Equity = new Equity
