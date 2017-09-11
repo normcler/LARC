@@ -11,7 +11,6 @@ namespace LARC.Models
   /// </summary>
   public class FundTable
   {
-    private LARC_DBEntities db = new LARC_DBEntities();
 
     public string Name { get; set; }
     public List<FundTableRow> TableRows { get; set; }
@@ -33,16 +32,19 @@ namespace LARC.Models
       }
     }
 
-    //public FundTable(string fundSymbol)
-    //{
-    //  this.Name = fundSymbol;
-    //  List<FundEquity> fundEquityList =
-    //    db.FundEquities.Where(f => f.FundSymbol == fundSymbol).ToList();
-    //  foreach (var item in fundEquityList)
-    //  {
-    //    Equity equity = db.Equities.Where(x =>x.Ticker == item.EquitySymbol);
-    //    this.TableRows.Add(new FundTableRow(e)
-    //  }
-    //}
+    public FundTable(string fundSymbol, LARC_DBEntities db)
+    {
+      this.Name = fundSymbol;
+      List<FundEquity> fundEquityList =
+        db.FundEquities.Where(f => f.FundSymbol == fundSymbol).ToList();
+      List<FundTableRow> tableRows = new List<FundTableRow>();
+      foreach (var item in fundEquityList)
+      {
+        Equity equity = db.Equities.First(x => x.Symbol == item.EquitySymbol);
+        tableRows.Add(new FundTableRow(equity.Symbol, equity.Name,
+          equity.Price, item.Weighting));
+      }
+      this.TableRows = tableRows;
+    }
   }
 }
