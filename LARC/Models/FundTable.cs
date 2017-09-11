@@ -11,6 +11,8 @@ namespace LARC.Models
   /// </summary>
   public class FundTable
   {
+    private LARC_DBEntities db = new LARC_DBEntities();
+
     public string Name { get; set; }
     public List<FundTableRow> TableRows { get; set; }
 

@@ -327,7 +327,7 @@
           <Property Name="FundSymbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EquitySymbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Weighting" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="Shares" Type="Decimal" Nullable="false" />
+          <Property Name="Shares" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Equity" Relationship="LARC_DBModel.FK_FundEquities_Equities" FromRole="FundEquity" ToRole="Equity" />
           <NavigationProperty Name="Fund" Relationship="LARC_DBModel.FK_FundEquities_Funds" FromRole="FundEquity" ToRole="Fund" />
         </EntityType>

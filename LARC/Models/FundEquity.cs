@@ -17,7 +17,7 @@ namespace LARC.Models
         public string FundSymbol { get; set; }
         public string EquitySymbol { get; set; }
         public decimal Weighting { get; set; }
-        public decimal Shares { get; set; }
+        public int Shares { get; set; }
     
         public virtual Equity Equity { get; set; }
         public virtual Fund Fund { get; set; }
