@@ -29,10 +29,12 @@ namespace LARC.Models
         public System.DateTime DateCreated { get; set; }
         public System.DateTime ExpirationDate { get; set; }
         public Nullable<System.DateTime> DateLastModified { get; set; }
+        public string AspNetUserID { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual Address Address1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientDB> ClientDBs { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

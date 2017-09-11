@@ -5,22 +5,30 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="85e7a7c407e0485991997d9c61a0fa42" Name="Diagram1" ZoomLevel="66" DisplayType="true">
-        <EntityTypeShape EntityType="LARC_DBModel.AccountDB" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="LARC_DBModel.Address" Width="1.5" PointX="0.75" PointY="1.5" />
-        <EntityTypeShape EntityType="LARC_DBModel.ClientDB" Width="1.5" PointX="5.25" PointY="1.625" />
-        <EntityTypeShape EntityType="LARC_DBModel.Equity" Width="1.5" PointX="7.5" PointY="8.625" />
-        <EntityTypeShape EntityType="LARC_DBModel.FundEquity" Width="1.5" PointX="10" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LARC_DBModel.Fund" Width="1.5" PointX="7.5" PointY="5.75" />
-        <EntityTypeShape EntityType="LARC_DBModel.PortfolioDB" Width="1.5" PointX="7.5" PointY="1.625" />
-        <EntityTypeShape EntityType="LARC_DBModel.PortfolioFund" Width="1.5" PointX="9.75" PointY="1.625" />
+        <EntityTypeShape EntityType="LARC_DBModel.AccountDB" Width="1.5" PointX="8.25" PointY="3.875" />
+        <EntityTypeShape EntityType="LARC_DBModel.Address" Width="1.5" PointX="6" PointY="6.625" />
+        <EntityTypeShape EntityType="LARC_DBModel.AspNetRole" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="LARC_DBModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="3.5" />
+        <EntityTypeShape EntityType="LARC_DBModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="10.75" />
+        <EntityTypeShape EntityType="LARC_DBModel.AspNetUser" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="LARC_DBModel.ClientDB" Width="1.5" PointX="10.5" PointY="4.75" />
+        <EntityTypeShape EntityType="LARC_DBModel.Equity" Width="1.5" PointX="12.75" PointY="7.625" />
+        <EntityTypeShape EntityType="LARC_DBModel.FundEquity" Width="1.5" PointX="15" PointY="1.625" />
+        <EntityTypeShape EntityType="LARC_DBModel.Fund" Width="1.5" PointX="12.75" PointY="1.875" />
+        <EntityTypeShape EntityType="LARC_DBModel.PortfolioDB" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="LARC_DBModel.PortfolioFund" Width="1.5" PointX="15" PointY="4.75" />
         <AssociationConnector Association="LARC_DBModel.FK_Account_BillingAddress" />
         <AssociationConnector Association="LARC_DBModel.FK_Account_HomeAddressID" />
         <AssociationConnector Association="LARC_DBModel.FK_Client_Account" />
+        <AssociationConnector Association="LARC_DBModel.FK_Users_AspNetUsers" />
+        <AssociationConnector Association="LARC_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="LARC_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="LARC_DBModel.FK_PortfolioDB_CLientID" />
         <AssociationConnector Association="LARC_DBModel.FK_FundEquities_Equities" />
         <AssociationConnector Association="LARC_DBModel.FK_FundEquities_Funds" />
         <AssociationConnector Association="LARC_DBModel.FK_PortfolioFunds_Funds" />
         <AssociationConnector Association="LARC_DBModel.FK_PortfolioFunds_Portfolio" />
+        <AssociationConnector Association="LARC_DBModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

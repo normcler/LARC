@@ -56,8 +56,7 @@ namespace LARC.Controllers
           Symbol = x.FundSymbol,
           NumberOfShares = x.NumberOfShares ?? 0
         }).ToList();
-      Portfolio model = new Portfolio(dbRecord.Name,
-        holdingList);
+      Portfolio model = new Portfolio(dbRecord.Name, holdingList);
         //dbRecord.PortfolioFunds.Select(x => new PortfolioHolding
         //{
         //  Symbol = x.FundSymbol,
@@ -75,14 +74,21 @@ namespace LARC.Controllers
         var dbEquities = db.Equities;
         foreach (Holding equity in importEquities)
         {
-          // Do not include this equity if it is already in the Equities
-          // database or it has already been included in this list.
-          // (An instance of the second occured in fund FPMAX: there were two 
-          //  instances of equity SBER, a Russian bank called SBERBANK. The 
-          //  equity names were very slightly different.)
+          //  10-Sept-2017: Do not include this equity if it is already in the
+          //                Equities database or it has already been included
+          //                in this list.
+          //                (An instance of the second occured in fund FPMAX:
+          //                there were two instances of equity SBER, a Russian
+          //                bank called SBERBANK. The equity names were very
+          //                slightly different.)
 
-          if (dbEquities.Any(e => e.Symbol == equity.Ticker) ||
-             (newEquities.Any(n => n.Ticker == equity.Ticker)))
+          //  11-Sept-2017: Comment out the check for the equity already
+          //                present in the database. This case is accounted for
+          //                when the FundEquity instance is created.
+
+          if (newEquities.Any(n => n.Ticker == equity.Ticker))
+            //if (dbEquities.Any(e => e.Symbol == equity.Ticker) ||
+            // (newEquities.Any(n => n.Ticker == equity.Ticker)))
           {
             continue;
           }
@@ -100,7 +106,10 @@ namespace LARC.Controllers
             EquitySymbol = equity.Ticker,
             Shares = equity.SharesOwned ?? 0,
             Weighting = equity.Weighting ?? 0,
-            Equity = new Equity
+            //  this says don't add an equity if it's already in the Equities
+            //  database, otherwise, add a new one. Note, though the FundEquity
+            //  will always be added.
+            Equity = db.Equities.FirstOrDefault(x => x.Symbol == equity.Ticker) ?? new Equity
             {
               Name = equity.Name,
               Price = equity.Price ?? 0,

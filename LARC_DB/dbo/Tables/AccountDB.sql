@@ -10,9 +10,12 @@
 	ExpirationDate DATETIME NOT NULL 
 		DEFAULT(DATEADD(year, 1, GetUtcDate())),
 	DateLastModified DATETIME NULL,
-	CONSTRAINT PK_Account PRIMARY KEY (ID),
+	[AspNetUserID] NVARCHAR(128) NOT NULL, 
+    CONSTRAINT PK_Account PRIMARY KEY (ID),
 	CONSTRAINT FK_Account_HomeAddressID
 		FOREIGN KEY (HomeAddressID) REFERENCES Address(ID),
 	CONSTRAINT FK_Account_BillingAddress
-		FOREIGN KEY (BillingAddressID) REFERENCES Address(ID)
+		FOREIGN KEY (BillingAddressID) REFERENCES Address(ID),
+	CONSTRAINT [FK_Users_AspNetUsers]
+		FOREIGN KEY (AspNetUserID) REFERENCES AspNetUsers(ID)
 )

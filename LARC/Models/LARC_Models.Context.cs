@@ -27,6 +27,10 @@ namespace LARC.Models
     
         public virtual DbSet<AccountDB> AccountDBs { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<ClientDB> ClientDBs { get; set; }
         public virtual DbSet<Equity> Equities { get; set; }
         public virtual DbSet<FundEquity> FundEquities { get; set; }
