@@ -32,5 +32,17 @@ namespace LARC.Models
           (decimal)holding.Price, (decimal)holding.Weighting));
       }
     }
+
+    //public FundTable(string fundSymbol)
+    //{
+    //  this.Name = fundSymbol;
+    //  List<FundEquity> fundEquityList =
+    //    db.FundEquities.Where(f => f.FundSymbol == fundSymbol).ToList();
+    //  foreach (var item in fundEquityList)
+    //  {
+    //    Equity equity = db.Equities.Where(x =>x.Ticker == item.EquitySymbol);
+    //    this.TableRows.Add(new FundTableRow(e)
+    //  }
+    //}
   }
 }

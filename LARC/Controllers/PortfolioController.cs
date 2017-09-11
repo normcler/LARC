@@ -100,27 +100,32 @@ namespace LARC.Controllers
         List<FundEquity> fundEquityList = new List<FundEquity>();
         foreach (Holding equity in newEquities)
         {
-          FundEquity fundEquity = new FundEquity
+          //FundEquity fundEquity = new FundEquity
+          if (!db.FundEquities.Any(x => x.EquitySymbol == equity.Ticker && x.FundSymbol == key))
           {
-            FundSymbol = key,
-            EquitySymbol = equity.Ticker,
-            Shares = equity.SharesOwned ?? 0,
-            Weighting = equity.Weighting ?? 0,
-            //  this says don't add an equity if it's already in the Equities
-            //  database, otherwise, add a new one. Note, though the FundEquity
-            //  will always be added.
-            Equity = db.Equities.FirstOrDefault(x => x.Symbol == equity.Ticker) ?? new Equity
+            FundEquity fundEquity = new FundEquity
             {
-              Name = equity.Name,
-              Price = equity.Price ?? 0,
-              Symbol = equity.Ticker,
-              Sector = equity.Sector,
-              Currency = equity.Currency
-            }
-          };
-          db.FundEquities.Add(fundEquity);
-          fundEquityList.Add(fundEquity);
+              FundSymbol = key,
+              EquitySymbol = equity.Ticker,
+              Shares = equity.SharesOwned ?? 0,
+              Weighting = equity.Weighting ?? 0,
+              //  this says don't add an equity if it's already in the Equities
+              //  database, otherwise, add a new one. Note, though the FundEquity
+              //  will always be added.
+              Equity = db.Equities.FirstOrDefault(x => x.Symbol == equity.Ticker) ?? new Equity
+              {
+                Name = equity.Name,
+                Price = equity.Price ?? 0,
+                Symbol = equity.Ticker,
+                Sector = equity.Sector,
+                Currency = equity.Currency
+              }
+            };
+            db.FundEquities.Add(fundEquity);
+            fundEquityList.Add(fundEquity);
+          }
         }
+        
         db.SaveChanges();
       }
       return model;
