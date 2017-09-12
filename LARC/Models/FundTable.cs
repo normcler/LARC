@@ -19,19 +19,8 @@ namespace LARC.Models
     ///   A class created on-the-fly to a subset of the data for each holding
     ///   in a fund.
     /// </summary>
-    /// <param name=""></param>
-    public FundTable(string fundName, List<Holding> fundHoldingList)
-    {
-      this.Name = fundName;
-      int numOfHoldings = fundHoldingList.Count;
-      List<FundTableRow> tableRows = new List<FundTableRow>();
-      foreach (var holding in fundHoldingList)
-      {
-        this.TableRows.Add(new FundTableRow(holding.Ticker, holding.Name,
-          (decimal)holding.Price, (decimal)holding.Weighting));
-      }
-    }
-
+    /// <param name="fundSymbol">The mutual fund symbol</param>
+    /// <param name="db">The database</param>
     public FundTable(string fundSymbol, LARC_DBEntities db)
     {
       this.Name = fundSymbol;

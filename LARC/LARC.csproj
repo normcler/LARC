@@ -260,6 +260,7 @@
       <DependentUpon>LARC_Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PortfolioHolding.cs" />
+    <Compile Include="Models\PortfolioOverlapRow.cs" />
     <Compile Include="Models\PortfolioOverlapTable.cs" />
     <Compile Include="Models\SalesReport.cs" />
     <Compile Include="Models\Subscribe.cs" />
